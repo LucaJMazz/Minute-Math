@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Lilita+One&display=swap');
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(250, 250, 250);
+    font-family: "Bree Serif", serif;
+}
+a{
+    color: black;
+}
+/* Header */
+.navbar {
+    background-color: #959BD0; /* soft indigo */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: .5vw solid #8a78a5; /* subtle bottom border */
+    box-shadow: 0 0.1vh 1.5vh rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 5%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+/* Nav bar left side */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+div.nav-left img.icon {
+    vertical-align: middle;
+    width: 2.5vw;
+    height: 2.5vw;
+    object-fit: contain;
+    border-radius: 4px;
+}
+div.nav-left .menuIcon{
+    vertical-align: middle;
+    margin-top: -0.4vw;
+    font-size: 2.4vw;
+    cursor: pointer
+}
+div.nav-left h3 {
+    font-family: "Lilita One", sans-serif;
+    font-size: 1.5vw;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Nav bar right side */
+.nav-right {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    gap: 1rem;
+    font-size: 1.3vw;
+    padding-right: 3rem;
+}
+.nav-right i {
+    color: white;
+    cursor: pointer;
+}
+
+
+/* Main Title */
+h1.title{
+    font-family: "Lilita One", sans-serif;
+    font-size: clamp(50px, 3vw, 70px);
+    color: #343434;
+    text-align: center;
+    margin-top: clamp(8vw,14vh,150px);
+    margin-bottom: 3vh;
+}
+p.subtitle{
+    font-family: "Bree Serif", serif;
+    font-size: clamp(20px, 1.4vw, 40px);
+    color: #505050;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 2vh;
+}
+
+#date {
+    font-family: "Bree Serif", serif;
+    font-size: clamp(20px, 1.4vw, 40px);
+    color: #505050;
+    text-align: center;
+    margin-top: 3.2vh;
+}
+
+#buttonPanel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 20px;
+    gap: 1.5rem;
+}
+button.playButton{
+        
+    width: clamp(140px, 12.5vw, 400px);        
+    height: clamp(70px, 5vw, 160px);
+
+    background-color: #959BD0; /* soft indigo */
+    border: #8a78a5 solid 0.5vmax;
+    border-radius: 1000px;
+    color: white;
+    padding: 15px;
+    font-family: "Bree Serif", serif;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(18px, 1.5vw, 38px);
+    margin: 4px 2px;
+    cursor: pointer;
+}
+#play-button{
+    width: clamp(200px, 18vw, 420px); 
+}
+
+button.playButton:hover{
+    background-color: #8a78a5; /* soft indigo */
+}
+
+/* User Stats */
+/* User Stats Container */
+div.userStats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 30px;
+
+    background-color: #e6deeb;
+    border-radius: 40px;
+    border: #8a78a5 solid 0.5vmax;
+    width: 30%;
+    margin: 0 auto;
+    margin-bottom: 7.5vw;
+}
+
+  /* Title */
+#user-stats-title {
+    font-size: clamp(30px, 2.2vw, 50px);
+    margin: 0;
+}
+
+  /* Stats Row */
+.userStatWrapper {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    width: 100%;
+}
+
+  /* Individual Stat Block */
+.userStat {
+    text-align: center;
+}
+
+.userStat h2 {
+    font-size: clamp(18px, 1.5vw, 28px);
+    margin-bottom: 0.5rem;
+}
+
+.userStat p {
+    font-size: clamp(24px, 2vw, 40px);
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Bottom Info Panels */
+.bottomInfo {
+    display: flex;
+    justify-content: space-between; /* even spacing */
+    padding: 2rem;
+    flex-wrap: wrap;                /* lets it stack on smaller screens */
+    background-color: #f3f3f3;
+    box-shadow: 0 -0.7vh 1.5vh rgba(0, 0, 0, 0.12);
+}
+
+.infoText {
+    flex: 1;
+    min-width: 250px;               /* responsive fallback */
+    max-width: 33%;                 /* keeps it looking column-like */
+    padding: 2rem;
+    border-radius: 10px;
+}
+.infoText h2 {
+    font-size: clamp(20px, 1.5vw, 30px);
+    margin-bottom: 0.5rem;
+}
+.infoText p {
+    font-size: clamp(16px, 1.2vw, 24px);
+    margin: 0;
+    font-weight: normal;
+}
+
+.glow-flash {
+    box-shadow: 0 0 20px 6px #8a78a5;
+    transition: box-shadow 0.5s ease-in-out;
+}
+.glow-flash-off {
+    box-shadow: 0 0 0px 0px #8a78a500;
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+footer {
+    width: 100%;
+    background-color: #f3f3f3;
+    height: fit-content;
+}
+.footer{
+    width: 96%; /* since 2% padding on both sides */
+    margin: 0 auto;
+
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

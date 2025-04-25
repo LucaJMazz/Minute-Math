@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style> @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Lilita+One&display=swap');</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minute Math</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+</head>
+
+<header>
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="menuIcon" id="menu-button">
+                &#9776;
+            </div>
+            <img src="assets/icon.png" alt="Minute Math Logo" class="icon">
+            <h3 class="title">Minute Math</h3>
+        </div>
+
+        <div class="nav-right">
+            <a href="https://instagram.com/minutemath" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/minutemath/" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://tiktok.com/@minutemath" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </nav>
+</header>
+
+<body>
+    <h1 class="title">Minute Math</h1>
+    <p class="subtitle">Daily bite-sized Math Problems to power your brain!</p>
+    <hr>
+
+    <p id="date"></p> 
+
+    <script> // Get the current date and format it
+        const dateElement = document.getElementById('date');
+        const today = new Date();
+        const formatted = today.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+        dateElement.textContent = "Todays problem for "+formatted;
+    </script>
+
+    <div id="buttonPanel">
+        <button class="playButton" id="play-button">Play Todays Problem</button>
+        <button class="playButton" id="how-button">How to Play</button>
+    </div>
+
+    <div class="userStats">
+        <h1 class="title" id="user-stats-title">User Stats</h1>
+        
+        <div class="userStatWrapper">
+        <div class="userStat">
+            <h2>Score</h2>
+            <p id="score">0</p>
+        </div>
+        <div class="userStat">
+            <h2>Streak</h2>
+            <p id="streak">0</p>
+        </div>
+        </div>
+    </div>
+
+    <div class="bottomInfo">
+        <span class="infoText"> 
+            <h2>About Minute Math:</h2>
+            <p>  
+                Minute Math is a free to play, open-source math game, designed to help you sharpen your math skills in just a few minutes a day.
+                I made this as a simple portfolio project inspired by games like <a href="https://www.minutecryptic.com/" target="_blank">Minute Cryptic</a> and <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank">Wordle</a> but with a mathematical twist.
+                I believe that math is a skill that can be improved with practice, and Minute Math is here to help you do just that.
+                As a student in computer science, math is a skill that is often used and needs consistent practice to hone your skills so i started this as a way to practise math myself.
+                I hope you enjoy it as much as I do!
+            </p>
+        </span> 
+        <span class="infoText" id="how-to-play"> 
+            <h2>How to play:</h2>
+            <p>  
+                Each day, Minute Math presents you with a new math problem to solve: short, focused, and designed to test your skills. 
+                The problems range from algebra to logic-based puzzles, and they’re meant to be solved in just a few minutes. 
+                Simply read the question, work it out on paper, and enter your answer in the input box. 
+                You’ll earn points for correct solutions and build a streak by solving daily problems consistently. 
+                No timers, no pressure! just one problem a day to keep your brain sharp. 
+                Come back tomorrow for a new challenge!
+            </p>
+        </span> 
+        <span class="infoText"> 
+            <h2>Math Help:</h2>
+            <p>  Need a quick refresher on some basic algebra concepts?
+                <a href="https://www.openalgebra.com/?utm_source=MinuteMath(InDevelopment)" target="_blank">Open Algebra</a> is a free, open-source resource packed with explanations, examples, and step-by-step breakdowns.
+                Use it to get targeted help with the kinds of problems you’ll see in Minute Math, from basic operations to more advanced algebra concepts.
+            </p>
+        </span>
+    </div>
+
+    <footer>
+        <hr>
+        <div class="footer">
+            <a href="https://about:blank" target="_blank">Full 'About' Page</a>
+            <p>Created by Luca Mazzotta</p>
+            <p>
+                <a href="https://about:blank" target="_blank">Contact</a>
+                | 
+                <a href="https://github.com/LucaJMazz" target="_blank">GitHub page</a>
+            </p>
+        </div>
+</body>
+
+</html>
