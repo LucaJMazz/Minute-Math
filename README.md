@@ -1,10 +1,10 @@
-# Play Now!
--🔗 **Live Site:** [Play Minute Math Now](https://minute-math.netlify.app)
--🔗 **Live GitHub Page:** [Play Minute Math Now](https://lucajmazz.github.io/Minute-Math/)
+## Play Now!
+🔗 **Live Site:** [Play Minute Math Now](https://minute-math.netlify.app)
+🔗 **Live GitHub Page:** [Play Minute Math Now](https://lucajmazz.github.io/Minute-Math/)
 
 # Minute Math
 
-A daily math challenge web app that gives you one hard-hitting algebra or logic problem per day. Like Wordle, but math.
+A daily math challenge web app that gives you one hard-hitting algebra or logic problem per day, like Wordle, but math.
 
 ## 🚀 Features (Everything is still in development)
 - Daily problems that change every 24 hours
