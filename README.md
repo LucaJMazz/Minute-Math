@@ -1,4 +1,6 @@
-🔗 **Live Site:** [Play Minute Math Now](https://lucajmazz.github.io/Minute-Math/)
+# Play Now!
+🔗 **Live Site:** [Play Minute Math Now](https://minute-math.netlify.app)
+🔗 **Live GitHub Page:** [Play Minute Math Now](https://lucajmazz.github.io/Minute-Math/)
 
 # Minute Math
 
