@@ -43,5 +43,5 @@ function showHowToPlay() {
 
 function openPlay() {
     // Redirect to the play page
-    window.location.href = "play.html";
+    window.location.href = "/dist/index.html";
 }

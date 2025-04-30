@@ -1,21 +1,18 @@
 ## Play Now!
-- 🔗 **Live Site:** [Play Minute Math Now](https://minute-math.netlify.app) -Built with Netlify-
+- 🔗 **Live Site:** [Play Minute Math Now](https://minutemath.netlify.app) -Built with Netlify-
 - 🔗 **Live GitHub Page:** [GitHub Webpage](https://lucajmazz.github.io/Minute-Math/)
 
 # Minute Math
 
 A daily math challenge web app that gives you one hard-hitting algebra or logic problem per day, like Wordle, but math.
 
-## 🚀 Features (Everything is still in development)
-- Daily problems that change every 24 hours
-- Point system with streak tracking
-- Dynamic and clean HTML UI
-- Firebase login and data tracking (coming soon)
+## 🚀 How to play (Everything is still in development)
+- Open the [Homepage](https://lucajmazz.github.io/Minute-Math/), view your score and streak
+- Your score and streak are saved into your local data
+- Click play to play the current puzzle
+- Try and complete the problem, and make sure to know what the problem is asking you to solve
+- Type in your answer and press submit
+- You have 5 tries per day
+- If you don't get the answer, you can view the correct answer on the game over screen
+- Come back everyday for a new puzzle
 
-## 🛠 How to Use
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/LucaJMazz/MinuteMathProject.git
-   ```
-2. Open the `index.html` file in your browser.
-3. Play the daily math challenge and test your brainpower!
