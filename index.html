@@ -37,11 +37,18 @@
 
     <p id="date"></p> 
 
-    <script> // Get the current date and format it
+    <script> 
+    // Get the current date and format it
         const dateElement = document.getElementById('date');
         const today = new Date();
         const formatted = today.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
         dateElement.textContent = "Todays problem for "+formatted;
+
+        // Load score and streak from localStorage
+        const score = localStorage.getItem("minuteScore") || 0;
+        const streak = localStorage.getItem("minuteStreak") || 0;
+        document.getElementById("score").textContent = score;
+        document.getElementById("streak").textContent = streak;
     </script>
 
     <div id="buttonPanel">
