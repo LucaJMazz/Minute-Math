@@ -1,6 +1,5 @@
 ## Play Now!
 - 🔗 **Live Site:** [Play Minute Math Now](https://minutemath.netlify.app) -Built with Netlify-
-- 🔗 **Live GitHub Page:** [GitHub Webpage](https://lucajmazz.github.io/Minute-Math/)
 
 # Minute Math
 

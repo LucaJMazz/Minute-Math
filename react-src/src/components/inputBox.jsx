@@ -40,7 +40,7 @@ function InputBox({answer, onEndGame, inputInclude}) {
      * Handles the 'submit answer' button
      */
     function handleSubmit() {
-        let correctAnswer = (answer == userInput); // If the users answers match the json's answer
+        let correctAnswer = testCorrectAnswer(userInput); // If the users answers match the json's answer
 
         let newChances = chances - 1; // Decrements the users chances
         saveChances(newChances); // Updates local storage
@@ -63,6 +63,10 @@ function InputBox({answer, onEndGame, inputInclude}) {
         
         setChances(newChances); // Updates the chances useState
         setEndGame(endGameValue); // Updates the endGame useState
+    }
+
+    function testCorrectAnswer(userAnswer) {
+        return answer.includes(userAnswer);
     }
 
     /**

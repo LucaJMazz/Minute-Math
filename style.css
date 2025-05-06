@@ -216,6 +216,7 @@ footer {
     width: 100%;
     background-color: #f3f3f3;
     height: fit-content;
+    padding-bottom: 10px;
 }
 .footer{
     width: 96%; /* since 2% padding on both sides */

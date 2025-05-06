@@ -19,6 +19,7 @@ function App() {
  * Returns all of the UI for the app
  */
   return (
+    <>
     <div className="app">
       <NavBar /> 
         <div className="title-wrapper">
@@ -30,6 +31,7 @@ function App() {
         <Question />
       </div>
     </div>
+    </>
   )
 }
 

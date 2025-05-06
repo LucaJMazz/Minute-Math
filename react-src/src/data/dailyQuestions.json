@@ -1,362 +1,58 @@
 [
   {
     "id": "1",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( \\ln(x^2 - 1) = \\ln(8) \\)",
-    "answerJson": "3,-3",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "3"
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\log_2(x + 3) = 4 \\)",
+    "answerJson": ["13"],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 2
   },
   {
     "id": "2",
-    "questionJson": "Evaluate the derivative implicitly:",
-    "equationJson": "\\( x^2 + y^2 = 25 \\)",
-    "answerJson": "-x/y",
-    "inputIncludeJson": "=",
-    "difficultyJson": "3"
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( x^2 - 5x + 6 = 0 \\)",
+    "answerJson": ["2, 3", "3, 2"],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 1
   },
   {
     "id": "3",
-    "questionJson": "Solve the integral:",
-    "equationJson": "\\( \\int \\frac{x}{x^2 + 4} \\, dx \\)",
-    "answerJson": "0.5*ln(x^2+4)+C",
-    "inputIncludeJson": "=",
-    "difficultyJson": "3"
-  },
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( 3^{x+1} = 81 \\)",
+    "answerJson": ["3"],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 2
+  }, 
   {
     "id": "4",
-    "questionJson": "Differentiate:",
-    "equationJson": "\\( y = x^x \\)",
-    "answerJson": "x^x*(ln(x)+1)",
-    "inputIncludeJson": "y'=",
-    "difficultyJson": "3"
+    "questionJson": "Solve the system of equations:",
+    "equationJson": "\\( y = 5x - 1 \\) and \\( 8y = 3 - 2x \\)",
+    "answerJson": ["(1, 2)"],
+    "inputIncludeJson": "(x, y) = ",
+    "difficultyJson": 2
   },
   {
     "id": "5",
-    "questionJson": "Evaluate the limit:",
-    "equationJson": "\\( \\lim_{x \\to 0} \\frac{\\sin(3x)}{x} \\)",
-    "answerJson": "3",
-    "inputIncludeJson": "lim=",
-    "difficultyJson": "2"
-  },
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\frac{(x+1)!}{x!} + 2 = 8 \\)",
+    "answerJson": ["5"],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 3
+  }, 
   {
     "id": "6",
-    "questionJson": "Solve the exponential equation:",
-    "equationJson": "\\( 3^{2x - 1} = 27^{x} \\)",
-    "answerJson": "1",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "2"
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\sqrt{2x + 3} = 5 \\)",
+    "answerJson": ["11"],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 1
   },
   {
     "id": "7",
-    "questionJson": "Simplify the expression:",
-    "equationJson": "\\( \\frac{1}{1 + \\frac{1}{1 + \\frac{1}{x}}} \\)",
-    "answerJson": "(x+1)/(x+2)",
-    "inputIncludeJson": "=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "8",
-    "questionJson": "Find the exact value:",
-    "equationJson": "\\( \\sin(2\\arcsin(\\frac{3}{5})) \\)",
-    "answerJson": "24/25",
-    "inputIncludeJson": "=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "9",
-    "questionJson": "Evaluate the derivative:",
-    "equationJson": "\\( f(x) = \\ln(\\sin x) \\)",
-    "answerJson": "cot(x)",
-    "inputIncludeJson": "f'(x)=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "10",
-    "questionJson": "Solve the system of equations:",
-    "equationJson": "\\( x^2 + y^2 = 10, \\quad xy = 3 \\)",
-    "answerJson": "(3,1)",
-    "inputIncludeJson": "(x,y)=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "11",
-    "questionJson": "Find the inverse function:",
-    "equationJson": "\\( f(x) = \\ln(x - 2) \\)",
-    "answerJson": "e^x+2",
-    "inputIncludeJson": "",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "12",
-    "questionJson": "Evaluate the integral:",
-    "equationJson": "\\( \\int \\frac{1}{x^2 + 1} \\, dx \\)",
-    "answerJson": "arctan(x)+C",
-    "inputIncludeJson": "",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "13",
-    "questionJson": "Differentiate:",
-    "equationJson": "\\( y = \\tan^{-1}(2x) \\)",
-    "answerJson": "2/(1+4x^2)",
-    "inputIncludeJson": "y'=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "14",
-    "questionJson": "Evaluate the limit:",
-    "equationJson": "\\( \\lim_{x \\to \\infty} \\frac{2x^2 + 1}{x^2 - 3} \\)",
-    "answerJson": "2",
-    "inputIncludeJson": "lim=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "15",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( \\log_3(x^2 - 1) = 2 \\)",
-    "answerJson": "sqrt(10),-sqrt(10)",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "16",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( \\ln(x) + \\ln(x+3) = \\ln(10) \\)",
-    "answerJson": "2",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "17",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( e^{x+2} = 5 \\)",
-    "answerJson": "ln(5)-2",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "18",
-    "questionJson": "Simplify:",
-    "equationJson": "\\( \\ln(e^{2x}) \\)",
-    "answerJson": "2x",
-    "inputIncludeJson": "=",
-    "difficultyJson": "1"
-  },
-  {
-    "id": "19",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( 2\\ln(x) = \\ln(25) \\)",
-    "answerJson": "5",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "20",
-    "questionJson": "Evaluate the limit:",
-    "equationJson": "\\( \\lim_{x \\to 0^+} \\ln(x) \\)",
-    "answerJson": "-infinity",
-    "inputIncludeJson": "lim=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "21",
-    "questionJson": "Solve the system:",
-    "equationJson": "\\( x + y = 5, \\quad x - y = 3 \\)",
-    "answerJson": "4,1",
-    "inputIncludeJson": "(x,y)=",
-    "difficultyJson": "1"
-  },
-  {
-    "id": "22",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( \\frac{e^x - 1}{e^x + 1} = 0 \\)",
-    "answerJson": "0",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "23",
-    "questionJson": "Simplify:",
-    "equationJson": "\\( \\ln(1) \\)",
-    "answerJson": "0",
-    "inputIncludeJson": "=",
-    "difficultyJson": "1"
-  },
-  {
-    "id": "24",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( x^2 = 2 \\)",
-    "answerJson": "sqrt(2),-sqrt(2)",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "25",
-    "questionJson": "Solve the system:",
-    "equationJson": "\\( x^2 + y = 10, \\quad y = x \\)",
-    "answerJson": "3,3,-1,-1",
-    "inputIncludeJson": "(x,y)=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "26",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( \\ln(x^2) = 6 \\)",
-    "answerJson": "e^3,-e^3",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "27",
-    "questionJson": "Simplify:",
-    "equationJson": "\\( e^{\\ln(7)} \\)",
-    "answerJson": "7",
-    "inputIncludeJson": "=",
-    "difficultyJson": "1"
-  },
-  {
-    "id": "28",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( e^{2x} = 1 \\)",
-    "answerJson": "0",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "1"
-  },
-  {
-    "id": "29",
-    "questionJson": "Solve the system:",
-    "equationJson": "\\( x+y=7, \\quad x^2 + y^2 = 25 \\)",
-    "answerJson": "6,1,1,6",
-    "inputIncludeJson": "(x,y)=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "30",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( \\ln(x+1) - \\ln(x) = \\ln(2) \\)",
-    "answerJson": "1",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "31",
-    "questionJson": "Evaluate the derivative:",
-    "equationJson": "\\( f(x) = e^{3x} \\)",
-    "answerJson": "3e^(3x)",
-    "inputIncludeJson": "f'(x)=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "32",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( \\ln(2x) = \\ln(10) \\)",
-    "answerJson": "5",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "33",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( e^x = 4 \\)",
-    "answerJson": "ln(4)",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "1"
-  },
-  {
-    "id": "34",
-    "questionJson": "Solve the system:",
-    "equationJson": "\\( x - y = 4, \\quad xy = 21 \\)",
-    "answerJson": "7,3,3,7",
-    "inputIncludeJson": "(x,y)=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "35",
-    "questionJson": "Simplify:",
-    "equationJson": "\\( \\ln(e^x + e^{-x}) \\)",
-    "answerJson": "ln(e^x + e^(-x))",
-    "inputIncludeJson": "=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "36",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( e^{x} + e^{-x} = 5 \\)",
-    "answerJson": "2, -2",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "37",
-    "questionJson": "Simplify:",
-    "equationJson": "\\( \\ln\\left(\\frac{e^{3x}}{e^{x}}\\right) \\)",
-    "answerJson": "2x",
-    "inputIncludeJson": "=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "38",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( \\ln(x) + \\ln(x-1) = \\ln(6) \\)",
-    "answerJson": "3,2",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "39",
-    "questionJson": "Solve the system:",
-    "equationJson": "\\( x^2 + y^2 = 13, \\quad x - y = 1 \\)",
-    "answerJson": "3,2,2,3",
-    "inputIncludeJson": "(x,y)=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "40",
-    "questionJson": "Simplify:",
-    "equationJson": "\\( e^{\\ln(x^3)} \\)",
-    "answerJson": "x^3",
-    "inputIncludeJson": "=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "41",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( e^{x} = e^{2x + 1} \\)",
-    "answerJson": "-1",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "42",
-    "questionJson": "Evaluate the limit:",
-    "equationJson": "\\( \\lim_{x \\to 0} \\frac{e^x - 1}{x} \\)",
-    "answerJson": "1",
-    "inputIncludeJson": "lim=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "43",
-    "questionJson": "Solve for x:",
-    "equationJson": "\\( \\ln(x) - \\ln(x-2) = \\ln(3) \\)",
-    "answerJson": "3",
-    "inputIncludeJson": "x=",
-    "difficultyJson": "3"
-  },
-  {
-    "id": "44",
-    "questionJson": "Solve the system:",
-    "equationJson": "\\( xy = 6, \\quad x + y = 5 \\)",
-    "answerJson": "3,2,2,3",
-    "inputIncludeJson": "(x,y)=",
-    "difficultyJson": "2"
-  },
-  {
-    "id": "45",
-    "questionJson": "Simplify:",
-    "equationJson": "\\( \\ln\\left(e^{x} \\cdot e^{2} \\right) \\)",
-    "answerJson": "x+2",
-    "inputIncludeJson": "=",
-    "difficultyJson": "1"
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( e^{2x+1} = 7 \\)",
+    "answerJson": ["\\frac{\\ln 7 - 1}{2}"],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 3
   }
 ]

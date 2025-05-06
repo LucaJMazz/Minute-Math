@@ -7,6 +7,10 @@ import questions from '../data/dailyQuestions.json';
 
 function Question(){
 
+    /*
+     * Configures the MathJax settings for display
+     */
+
     const today = new Date(); // Gets todays date to display at the top
     const formattedDate = today.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }); // Formats the date for visuals
     
@@ -26,9 +30,9 @@ function Question(){
         return difficultyString
     }
 
-    const launchDate = new Date("2025-04-24"); // Launch date is here to tell the site when the clues start
+    const launchDate = new Date("2025-05-4"); // Launch date is here to tell the site when the clues start
     const daysSinceLaunch = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24)).toString(); // Calculates the current day and the amount of days since launch 
-    const questionAmount = 46; // Total amount of questions in the json file
+    const questionAmount = 4; // Total amount of questions in the json file
 
     /**
      * Recursive function makes sure the id's don't go out of the bounds of the question amount

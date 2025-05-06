@@ -1,24 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Lilita+One&display=swap');
-html, body {
-    margin: 0;
-    padding: 0;
-    background-color: rgb(250, 250, 250);
-    font-family: "Bree Serif", serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #343434;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(250, 250, 250);
+  font-family: "Bree Serif", serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #343434;
+}
+.app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
 }
 
 /* Header */
 .navbar {
-  background-color: #959BD0; /* soft indigo */
+  background-color: #959BD0;
+  /* soft indigo */
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  border-bottom: .5vw solid #8a78a5; /* subtle bottom border */
+  border-bottom: .5vw solid #8a78a5;
+  /* subtle bottom border */
   box-shadow: 0 0.1vh 1.5vh rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 5%;
@@ -27,12 +40,14 @@ html, body {
   left: 0;
   z-index: 999;
 }
+
 /* Nav bar left side */
 .nav-left {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
+
 div.nav-left img.icon {
   vertical-align: middle;
   width: 2.5vw;
@@ -40,17 +55,29 @@ div.nav-left img.icon {
   object-fit: contain;
   border-radius: 4px;
 }
-div.nav-left .menuIcon{
+
+div.nav-left .menuIcon {
   vertical-align: middle;
   margin-top: -0.4vw;
   font-size: 2.4vw;
-  cursor: pointer
+  cursor: pointer;
+  user-select: none;
 }
+
 div.nav-left h3 {
   font-family: "Lilita One", sans-serif;
   font-size: 1.5vw;
   color: #ffffff;
   text-align: center;
+}
+
+.nav-right a {
+  color: whitesmoke;
+  font-size: 1vw;
+}
+
+.nav-right .fa-github-square {
+  font-size: 1.9vw;
 }
 
 /* Nav bar right side */
@@ -62,15 +89,59 @@ div.nav-left h3 {
   font-size: 1.3vw;
   padding-right: 3rem;
 }
+
 .nav-right i {
   color: white;
   cursor: pointer;
 }
 
+/* Side Menu */
+
+.side-menu-wrapper {
+  position: fixed;
+  margin-top: -5%;
+  left: 0;
+  height: 100vh;
+  width: 350px;
+
+  background-color: #e6deeb;
+  border-right: #8a78a5 solid 5px;
+  z-index: 500;
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start;
+  padding-top: 11.5vmax;
+  font-size: 20.5px;
+} 
+
+.side-menu-wrapper a{
+  text-decoration: none;
+  color: #343434;
+}
+
+.side-menu-wrapper p {
+  margin-left: 20px;
+}
+
+.side-button {
+  width: calc(100% - 4rem);
+  cursor: pointer;
+  padding: 1rem;
+  padding-left: 3rem;
+  border-bottom: 2px solid #8a78a5;
+}
+
+.side-button:hover {
+  background-color: #8a78a533;
+  border-bottom: 5px solid #8a78a5;
+}
+
 
 /* Main App */
 div.app {
-  margin-top: 9vmin;
+  /*margin-top: 9vmin;*/
   height: fit-content;
   width: fit-content;
 
@@ -81,13 +152,14 @@ div.app {
 }
 
 .title-wrapper {
+  margin-top: 9vh;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   padding-bottom: 3.5vh;
 }
 
-h1.title{
+h1.title {
   font-family: "Lilita One", sans-serif;
   font-size: clamp(30px, 2.7vw, 120px);
   color: #343434;
@@ -102,7 +174,7 @@ h1.title{
   margin-bottom: 0.5px;
 }
 
-div.game-box{
+div.game-box {
 
   height: fit-content;
   width: fit-content;
@@ -136,18 +208,18 @@ div.question-wrapper {
 div.difficulty-panel {
   display: flex;
   flex-direction: row;
-  font-size: clamp(10px, .75vw, 20px);  
+  font-size: clamp(10px, .75vw, 20px);
 }
 
 div.question-panel {
   background-color: #e6deeb;
-  width: clamp(500px, 35vw, 800px);        
+  width: clamp(500px, 35vw, 800px);
   height: fit-content;
   border-radius: 40px;
   border: #8a78a5 solid 0.8vmax;
   margin: 0 auto;
   margin-bottom: 1.5vw;
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,22 +227,21 @@ div.question-panel {
 }
 
 .question-title {
-  font-size: clamp(20px, 1.6vw, 30px);  
+  font-size: clamp(20px, 1.6vw, 30px);
 }
 
 div.question-display {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
 
   padding-top: 5%;
   padding-bottom: 5%;
   margin-bottom: 15px;
-  
 
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: clamp(26px, 2.2vw, 40px);  
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: clamp(26px, 2.2vw, 40px);
 }
 
 /* Input Box */
@@ -191,8 +262,9 @@ div.question-display {
   color: #343434;
 }
 
-.button {  
-  background-color: #959BD0; /* soft indigo */
+.button {
+  background-color: #959BD0;
+  /* soft indigo */
   border: #8a78a5 solid 0.5vmax;
   border-radius: 1000px;
   color: white;
@@ -206,14 +278,15 @@ div.question-display {
   font-size: clamp(18px, 1.5vw, 38px);
   margin: 4px 2px;
   cursor: pointer;
-
+  user-select: none;
   width: 60%;
 
   margin-bottom: 1.5vw;
 }
 
-.button:hover{
-  background-color: #8a78a5; /* soft indigo */
+.button:hover {
+  background-color: #8a78a5;
+  /* soft indigo */
 }
 
 .input-box {
@@ -224,17 +297,19 @@ div.question-display {
 
   border: solid 0.6vmax #8a78a5;
   border-radius: 20px;
-  width: clamp(470px, 33vw, 800px);        
+  width: clamp(470px, 33vw, 800px);
   height: clamp(30px, 6vw, 571px);
   justify-content: center;
   margin-bottom: 1.5vw;
 
   font-size: clamp(18px, 1.5vw, 38px);
 }
+
 .input-box p {
   font-size: 2.5vmax;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 .input-box input {
   height: 80%;
   width: 70%;
@@ -243,14 +318,14 @@ div.question-display {
   outline: none;
   border: solid 2.5px #8a78a54f;
   font-size: 2.5vmax;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .button.continue {
   width: clamp(130px, 24vw, 500px);
 }
 
-/* Incorrect Poppup */
+/* Incorrect Pop up */
 div.incorrect-popup {
   position: absolute;
   top: 50%;
@@ -262,12 +337,12 @@ div.incorrect-popup {
   border: solid 0.7vmax rgb(176, 45, 45);
   background-color: rgb(231, 231, 231);
   border-radius: 10000px;
-  width: clamp(70px, 15vw, 800px);        
+  width: clamp(70px, 15vw, 800px);
   height: clamp(30px, 4vw, 571px);
   font-size: 1.3vmax;
   color: rgb(176, 45, 45);
 
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 /* Game Over Screen */
@@ -276,6 +351,7 @@ div.incorrect-popup {
   width: fit-content;
   height: fit-content;
   margin-top: 5%;
+  margin-bottom: 5%;
   padding: 35%;
   padding-top: 10%;
   padding-bottom: 15%;
@@ -297,7 +373,7 @@ div.incorrect-popup {
 
 .answer div {
   min-width: 50px;
-  margin-left: 15px; 
+  margin-left: 15px;
   padding: 2%;
   background-color: whitesmoke;
   border: #8a78a5 solid 5px;

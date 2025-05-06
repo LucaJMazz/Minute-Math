@@ -1,0 +1,85 @@
+/* FAQ and About Page Styles */
+body {
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #f3f3f3;
+  background-color: #959BD0;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  box-shadow: 0vw 0vw 1vw #0000007a;
+  border-bottom: #8a78a5 solid 0.8vw;
+}
+header h2 {
+  margin-top: 0px;
+  font-family: "Lilita One", sans-serif;
+  font-size: clamp(22px, 3vw, 44px);
+}
+
+/* Page Title */
+.page-title {
+  font-family: "Lilita One", sans-serif;
+  font-size: clamp(32px, 5vw, 64px);
+  text-align: center;
+  color: #fafafa;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+/* Subtitles for sections */
+.section-subtitle {
+  font-family: "Bree Serif", serif;
+  font-size: clamp(20px, 2.5vw, 36px);
+  color: #4a4a4a;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  padding: 0 2rem;
+}
+
+/* Paragraphs and general content */
+.page-content {
+  font-family: "Bree Serif", serif;
+  font-size: clamp(16px, 1.25vw, 24px);
+  color: #555555;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+}
+
+/* Section block wrapper */
+.content-section {
+  margin-bottom: 3rem;
+  border-left: 4px solid #8a78a5;
+  padding-left: 1rem;
+}
+
+footer {
+  width: 100%;
+  background-color: #f3f3f3;
+  height: fit-content;
+  padding-bottom: 10px;
+}
+.footer{
+  font-family: "Bree Serif", serif;
+  font-size: clamp(16px, 1.25vw, 24px);
+  width: 96%; /* since 2% padding on both sides */
+  margin: 0 auto;
+
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

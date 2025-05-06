@@ -43,12 +43,6 @@
         const today = new Date();
         const formatted = today.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
         dateElement.textContent = "Todays problem for "+formatted;
-
-        // Load score and streak from localStorage
-        const score = localStorage.getItem("minuteScore") || 0;
-        const streak = localStorage.getItem("minuteStreak") || 0;
-        document.getElementById("score").textContent = score;
-        document.getElementById("streak").textContent = streak;
     </script>
 
     <div id="buttonPanel">
@@ -68,6 +62,13 @@
             <h2>Streak</h2>
             <p id="streak">0</p>
         </div>
+        <script>
+            // Load score and streak from localStorage
+            const score = localStorage.getItem("minuteScore") || 0;
+            const streak = localStorage.getItem("minuteStreak") || 0;
+            document.getElementById("score").textContent = score;
+            document.getElementById("streak").textContent = streak;
+        </script>
         </div>
     </div>
 
@@ -105,10 +106,10 @@
     <footer>
         <hr>
         <div class="footer">
-            <a href="https://about:blank" target="_blank">Full 'About' Page</a>
+            <a href="/about.html" target="_blank">Full 'About' Page</a>
             <p>Created by Luca Mazzotta</p>
             <p>
-                <a href="https://about:blank" target="_blank">Contact</a>
+                <a href="https://github.com/LucaJMazz" target="_blank">Contact</a>
                 | 
                 <a href="https://github.com/LucaJMazz" target="_blank">GitHub page</a>
             </p>

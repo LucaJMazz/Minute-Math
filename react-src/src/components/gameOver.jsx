@@ -49,7 +49,7 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
      * Displays the answer on the button
      */
     function showAnswer() {
-        setAnswer(inputInclude +""+ answer);
+        setAnswer(inputInclude +""+ answer[0]);
     }
 
     /**
