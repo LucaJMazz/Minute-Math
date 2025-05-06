@@ -38,17 +38,21 @@ div.nav-left img.icon {
     object-fit: contain;
     border-radius: 4px;
 }
-div.nav-left .menuIcon{
-    vertical-align: middle;
-    margin-top: -0.4vw;
-    font-size: 2.4vw;
-    cursor: pointer
-}
 div.nav-left h3 {
     font-family: "Lilita One", sans-serif;
     font-size: 1.5vw;
     color: #ffffff;
     text-align: center;
+}
+
+/* Nav bar right side */
+.nav-right a {
+    color: whitesmoke;
+    font-size: 1vw;
+}
+
+.nav-right .fa-github-square {
+    font-size: 1.9vw;
 }
 
 /* Nav bar right side */
@@ -60,11 +64,11 @@ div.nav-left h3 {
     font-size: 1.3vw;
     padding-right: 3rem;
 }
+
 .nav-right i {
     color: white;
     cursor: pointer;
 }
-
 
 /* Main Title */
 h1.title{

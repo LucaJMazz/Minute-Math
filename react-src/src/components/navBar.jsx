@@ -31,7 +31,7 @@ function NavBar() {
                 </div>
 
                 <div className="nav-right">
-                    <a href="/help.html" target="_blank"> <i className="far fa-question-circle"></i> How do I format my answer?</a>
+                    <a href="/answer-format" target="_blank"> <i className="far fa-question-circle"></i> How do I format my answer?</a>
                     <a href="https://github.com/LucaJMazz/Minute-Math" target="_blank"><i className="fab fa-github-square"></i></a>
                 </div>
             </nav>
