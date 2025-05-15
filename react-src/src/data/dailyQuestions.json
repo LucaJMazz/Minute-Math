@@ -3,56 +3,306 @@
     "id": "1",
     "questionJson": "Solve for x in the equation:",
     "equationJson": "\\( \\log_2(x + 3) = 4 \\)",
-    "answerJson": ["13"],
+    "answerJson": [
+      "13"
+    ],
     "inputIncludeJson": "x = ",
     "difficultyJson": 2
   },
   {
     "id": "2",
-    "questionJson": "Solve for x in the equation:",
-    "equationJson": "\\( x^2 - 5x + 6 = 0 \\)",
-    "answerJson": ["2, 3", "3, 2"],
-    "inputIncludeJson": "x = ",
+    "questionJson": "Simplify the logarithmic expression:",
+    "equationJson": "\\( \\log(1000) \\)",
+    "answerJson": [
+      "3"
+    ],
+    "inputIncludeJson": "",
     "difficultyJson": 1
   },
   {
     "id": "3",
     "questionJson": "Solve for x in the equation:",
-    "equationJson": "\\( 3^{x+1} = 81 \\)",
-    "answerJson": ["3"],
-    "inputIncludeJson": "x = ",
-    "difficultyJson": 2
-  }, 
-  {
-    "id": "4",
-    "questionJson": "Solve the system of equations:",
-    "equationJson": "\\( y = 5x - 1 \\) and \\( 8y = 3 - 2x \\)",
-    "answerJson": ["(1, 2)"],
-    "inputIncludeJson": "(x, y) = ",
-    "difficultyJson": 2
-  },
-  {
-    "id": "5",
-    "questionJson": "Solve for x in the equation:",
-    "equationJson": "\\( \\frac{(x+1)!}{x!} + 2 = 8 \\)",
-    "answerJson": ["5"],
-    "inputIncludeJson": "x = ",
-    "difficultyJson": 3
-  }, 
-  {
-    "id": "6",
-    "questionJson": "Solve for x in the equation:",
-    "equationJson": "\\( \\sqrt{2x + 3} = 5 \\)",
-    "answerJson": ["11"],
+    "equationJson": "\\( x^2 - 5x + 6 = 0 \\)",
+    "answerJson": [
+      "2,3",
+      "3,2"
+    ],
     "inputIncludeJson": "x = ",
     "difficultyJson": 1
   },
   {
-    "id": "7",
+    "id": "4",
+    "questionJson": "Solve the system of equations:",
+    "equationJson": "\\( y = 3x - 1 \\) and \\( 8y = 32 - 16x \\)",
+    "answerJson": [
+      "(1,2)"
+    ],
+    "inputIncludeJson": "(x, y) = ",
+    "difficultyJson": 1
+  },
+  {
+    "id": "5",
+    "questionJson": "Simplify the expression:",
+    "equationJson": "\\( (\\sqrt{3})^4 \\)",
+    "answerJson": [
+      "9"
+    ],
+    "inputIncludeJson": "",
+    "difficultyJson": 2
+  },
+  {
+    "id": "6",
     "questionJson": "Solve for x in the equation:",
-    "equationJson": "\\( e^{2x+1} = 7 \\)",
-    "answerJson": ["\\frac{\\ln 7 - 1}{2}"],
+    "equationJson": "\\( \\frac{(x+1)!}{x!} + 2 = 8 \\)",
+    "answerJson": [
+      "5"
+    ],
     "inputIncludeJson": "x = ",
     "difficultyJson": 3
+  },
+  {
+    "id": "7",
+    "questionJson": "Simplify the expression",
+    "equationJson": "\\( \\frac{5^{-2}}{25^{-1}} \\)",
+    "answerJson": ["1"],
+    "inputIncludeJson": "",
+    "difficultyJson": 2
+  },
+  {
+    "id": "8",
+    "questionJson": "Simplify the expression:",
+    "equationJson": "\\( (3^{-1})^2 \\)",
+    "answerJson": [
+      "1/9"
+    ],
+    "inputIncludeJson": "",
+    "difficultyJson": 1
+  },
+  {
+    "id": "9",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( e^{2x+1} = 7 \\)",
+    "answerJson": [
+      "(ln(7)-1)/2",
+      "(ln7-1)/2"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 3
+  },
+  {
+    "id": "10",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\sqrt{x} + \\sqrt{x} = 14 \\)",
+    "answerJson": [
+      "49"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 1
+  },
+  {
+    "id": "11",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\frac{2^x + 10}{3} = 4^x \\)",
+    "answerJson": [
+      "1"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 3
+  },
+  {
+    "id": "12",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( |3x - 2| = 7 \\)",
+    "answerJson": [
+      "3",
+      "-5/3"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 2
+  },
+  {
+    "id": "13",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( 5x - 3 = 2x + 9 \\)",
+    "answerJson": [
+      "4"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 1
+  },
+  {
+    "id": "14",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\log_3(x + 6) = 2 \\)",
+    "answerJson": [
+      "3"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 2
+  },
+  {
+    "id": "15",
+    "questionJson": "Solve the system of equations:",
+    "equationJson": "\\( 2x + y = 7 \\) and \\( x - y = 1 \\)",
+    "answerJson": [
+      "(8/3,5/3)"
+    ],
+    "inputIncludeJson": "(x, y) = ",
+    "difficultyJson": 2
+  },
+  {
+    "id": "n",
+    "questionJson": "Simplify the expression.",
+    "equationJson": "\\( \\frac{\\sqrt[3]{x^4} \\cdot x^{1/2}}{x^{5/6}} \\)",
+    "answerJson": ["x"],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 3
+  },
+  {
+    "id": "17",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( e^{x} + 2 = 5 \\)",
+    "answerJson": [
+      "ln(3)", "ln3"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 2
+  },
+  {
+    "id": "18",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( x^2 + 2x - 8 = 0 \\)",
+    "answerJson": [
+      "2,-4",
+      "-4,2"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 1
+  },
+  {
+    "id": "19",
+    "questionJson": "Simplify the exponential expression:",
+    "equationJson": "\\( 2^3 \\cdot 2^{-5} \\)",
+    "answerJson": [
+      "1/4"
+    ],
+    "inputIncludeJson": "",
+    "difficultyJson": 2
+  },
+  {
+    "id": "20",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( 2\\sqrt{x} + 1 = 15 \\)",
+    "answerJson": [
+      "49"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 2
+  },
+  {
+    "id": "21",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( 3^{x+1} = 81 \\)",
+    "answerJson": [
+      "3"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 2
+  },
+  {
+    "id": "22",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\frac{(x+2)!}{x!} = 20 \\)",
+    "answerJson": [
+      "3"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 3
+  },
+  {
+    "id": "23",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( 3^{2x-1} = 27 \\)",
+    "answerJson": [
+      "2"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 2
+  },
+  {
+    "id": "24",
+    "questionJson": "Simplify the expression:",
+    "equationJson": "\\( \\frac{(2x^{-3}y^2)^{-2}}{(4x^2y^{-1})^{-1}} \\)",
+    "answerJson": ["x^8/y^5", "(x^8)/(y^5)"],
+    "inputIncludeJson": "",
+    "difficultyJson": 3
+  },
+  {
+    "id": "25",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\sqrt{\\sqrt{x}} = 2 \\)",
+    "answerJson": [
+      "16"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 2
+  },
+  {
+    "id": "n",
+    "questionJson": "Simplify the expression.",
+    "equationJson": "\\( \\frac{2x^{-1}}{4x} \\)",
+    "answerJson": ["1/2x^-2", "1/2x^(-2)", "(1/2)x^-2", "(1/2)x^(-2)"],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 1
+  },
+  {
+    "id": "27",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\log(x) + \\log(2) = 1 \\)",
+    "answerJson": [
+      "5"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 3
+  },
+  {
+    "id": "28",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\sqrt{3x + 13} + \\sqrt{x} = 5 \\)",
+    "answerJson": [
+      "1"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 3
+  }, 
+  {
+    "id": "29",
+    "questionJson": "Simplify the expression:",
+    "equationJson": "\\( \\sqrt{50} \\)",
+    "answerJson": [
+      "5sqrt(2)", "5sqrt2"
+    ],
+    "inputIncludeJson": "",
+    "difficultyJson": 1
+  },
+  {
+    "id": "30",
+    "questionJson": "Solve for x in the equation:",
+    "equationJson": "\\( \\sqrt{2x + 3} = 5 \\)",
+    "answerJson": [
+      "11"
+    ],
+    "inputIncludeJson": "x = ",
+    "difficultyJson": 1
+  },
+  {
+    "id": "31",
+    "questionJson": "Simplify the logarithmic expression:",
+    "equationJson": "\\( \\log_5(25) \\)",
+    "answerJson": [
+      "2"
+    ],
+    "inputIncludeJson": "",
+    "difficultyJson": 2
   }
 ]

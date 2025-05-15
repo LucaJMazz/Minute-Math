@@ -66,7 +66,8 @@ function InputBox({answer, onEndGame, inputInclude}) {
     }
 
     function testCorrectAnswer(userAnswer) {
-        return answer.includes(userAnswer);
+        let formattedAnswer = userAnswer.replaceAll(' ', '');
+        return answer.includes(formattedAnswer);
     }
 
     /**
