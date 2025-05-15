@@ -30,7 +30,7 @@ function Question(){
         return difficultyString
     }
 
-    const launchDate = new Date("2025-05-4T00:00:00Z"); // universal and consistent // Launch date is here to tell the site when the clues start
+    const launchDate = new Date("2025-05-04T00:00:00Z"); // universal and consistent // Launch date is here to tell the site when the clues start
     const daysSinceLaunch = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24)).toString(); // Calculates the current day and the amount of days since launch 
     const questionAmount = 31; // Total amount of questions in the json file
 
