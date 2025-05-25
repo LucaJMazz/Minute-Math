@@ -50,8 +50,8 @@ body {
 
 div.nav-left img.icon {
   vertical-align: middle;
-  width: 2.5vw;
-  height: 2.5vw;
+  width: clamp(25px, 2.5vw, 200px);
+  height: clamp(25px, 2.5vw, 200px);
   object-fit: contain;
   border-radius: 4px;
 }
@@ -59,7 +59,7 @@ div.nav-left img.icon {
 div.nav-left .menuIcon {
   vertical-align: middle;
   margin-top: -0.4vw;
-  font-size: 2.4vw;
+  font-size: clamp(20px, 2.5vw, 200px);
   cursor: pointer;
   user-select: none;
 }
@@ -73,11 +73,11 @@ div.nav-left h3 {
 
 .nav-right a {
   color: whitesmoke;
-  font-size: 1vw;
+  font-size: clamp(10px, 1vw, 200px);
 }
 
 .nav-right .fa-github-square {
-  font-size: 1.9vw;
+  font-size: clamp(25px, 1.9vw, 200px);
 }
 
 /* Nav bar right side */
@@ -93,6 +93,19 @@ div.nav-left h3 {
 .nav-right i {
   color: white;
   cursor: pointer;
+}
+
+/* small nav */
+@media (max-width: 768px) {
+  div.nav-left h3 {
+    display: none
+  }
+
+  .navbar {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
 }
 
 /* Side Menu */
@@ -174,11 +187,12 @@ h1.title {
   margin-bottom: 0.5px;
 }
 
-div.game-box {
 
+div.game-box {
+  
   height: fit-content;
   width: fit-content;
-
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -191,6 +205,40 @@ p.date {
   text-align: center;
   margin: 0vh;
   padding: 1vmax;
+}
+
+/* small title */
+@media (max-width: 768px) {
+  .title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Add this */
+  padding-bottom: 3.5vh;
+}
+
+  h1.title {
+    font-family: "Lilita One", sans-serif;
+    font-size: clamp(30px, 2.7vw, 120px);
+    color: #343434;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-right: 0px;
+  }
+
+  .title-wrapper p {
+    text-align: center;
+    margin-bottom: 0.5px;
+    margin-right: 0px;
+  }
+
+  p.date {
+  font-size: clamp(15px, 0.5vw, 60px);
+  color: #343434;
+  text-align: center;
+  margin: 0vh;
+  padding: 1vmax;
+  }
+
 }
 
 hr {
@@ -244,6 +292,30 @@ div.question-display {
   font-size: clamp(26px, 2.2vw, 40px);
 }
 
+/* Question box Small*/
+@media (max-width: 768px) {
+  div.difficulty-panel {
+    font-size: clamp(10px, .7vw, 20px);
+  }
+    
+  div.question-panel {
+    width: clamp(250px, 60vw, 800px);
+    border: #8a78a5 solid 0.8vmax;
+  }
+
+  .question-title {
+    font-size: clamp(15px, 1vw, 30px);
+  }
+
+  div.question-display {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin-bottom: 15px;
+
+    font-size: clamp(20px, 1.9vw, 40px);
+  }
+}
+
 /* Input Box */
 
 .input-wrapper {
@@ -258,7 +330,7 @@ div.question-display {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  font-size: 1.2vw;
+  font-size: clamp(18px, 1.2vw, 38px);
   color: #343434;
 }
 
@@ -345,6 +417,50 @@ div.incorrect-popup {
   pointer-events: none;
 }
 
+/* input box Small*/
+@media (max-width: 768px) {
+  .input-area {
+  font-size: clamp(16px, 1.2vw, 38px);
+  }
+
+  .button {
+    padding: 15px;
+    font-size: clamp(18px, 1.5vw, 38px);
+    width: 100%;
+  }
+
+  .input-box {
+    width: clamp(250px, 60vw, 800px);
+    height: clamp(30px, 10vw, 571px);
+    justify-content: center;
+    margin-bottom: 1.5vw;
+
+    font-size: clamp(18px, 1.5vw, 38px);
+  }
+
+  .input-box p {
+    font-size: 2.5vmax;
+  }
+
+  .input-box input {
+    height: 80%;
+    width: 70%;
+
+    background: transparent;
+    outline: none;
+    border: solid 2.5px #8a78a54f;
+    font-size: 2.5vmax;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .button.continue {
+    padding: 15px;
+    font-size: clamp(18px, 1.5vw, 38px);
+    width: 100%;
+  }
+
+}
+
 /* Game Over Screen */
 .game-over {
   background-color: #e6deeb;
@@ -409,4 +525,22 @@ div.incorrect-popup {
   flex-direction: row;
   justify-content: space-evenly;
   gap: 50px;
+}
+
+/* game over box Small*/
+@media (max-width: 768px) {
+  .game-over {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 5%;
+    padding-top: 8%;
+    padding-bottom: 10%;
+
+    border-radius: 2vmax;
+  }
+
+  .game-over .title {
+    padding-bottom: 2%;
+    font-size: clamp(18px, 3vw, 38px);
+  }
 }

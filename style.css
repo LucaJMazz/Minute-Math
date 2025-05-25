@@ -33,14 +33,14 @@ a{
 }
 div.nav-left img.icon {
     vertical-align: middle;
-    width: 2.5vw;
-    height: 2.5vw;
+    width: clamp(25px, 2.5vw, 200px);
+    height: clamp(25px, 2.5vw, 200px);
     object-fit: contain;
     border-radius: 4px;
 }
 div.nav-left h3 {
     font-family: "Lilita One", sans-serif;
-    font-size: 1.5vw;
+    font-size: clamp(15px, 1vw, 200px);
     color: #ffffff;
     text-align: center;
 }
@@ -48,11 +48,11 @@ div.nav-left h3 {
 /* Nav bar right side */
 .nav-right a {
     color: whitesmoke;
-    font-size: 1vw;
+    font-size: clamp(10px, 1vw, 200px);
 }
 
 .nav-right .fa-github-square {
-    font-size: 1.9vw;
+    font-size: clamp(15px, 1.9vw, 200px);
 }
 
 /* Nav bar right side */
