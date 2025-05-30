@@ -1,17 +1,34 @@
+import { useEffect } from "react";
 import { useState } from "react"
 import { MathJaxContext, MathJax } from "better-react-mathjax";
 import { motion } from 'framer-motion'
 import InputBox from './inputBox'
 import GameOver from "./gameOver";
-import questions from '../data/dailyQuestions.json';
 
 function Question(){
 
+    const [questions, setQuestions] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [endGame, setEndGame] = useState(0);
+
+    useEffect(() => {
+    fetch(`https://lucajmazz.github.io/minute-math-data/dailyQuestions.json?cb=${Date.now()}`)
+        .then((res) => res.json())
+        .then((data) => {
+        setQuestions(data);
+        setLoading(false);
+        })
+        .catch((err) => {
+        console.error("Failed to fetch questions:", err);
+        setLoading(false);
+        });
+    }, []);
     /*
      * Configures the MathJax settings for display
      */
 
-    const today = new Date(); // Gets todays date to display at the top
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // local midnight
     const formattedDate = today.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }); // Formats the date for visuals
     
     /**
@@ -32,7 +49,8 @@ function Question(){
 
     const launchDate = new Date("2025-05-04T00:00:00Z"); // universal and consistent // Launch date is here to tell the site when the clues start
     const daysSinceLaunch = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24)).toString(); // Calculates the current day and the amount of days since launch 
-    const questionAmount = 31; // Total amount of questions in the json file
+    const questionAmount = questions[questions.length-1]?.id; // Total amount of questions in the json file
+    console.log(questionAmount);
 
     /**
      * Recursive function makes sure the id's don't go out of the bounds of the question amount
@@ -49,6 +67,7 @@ function Question(){
     
     const questionId = recycleQuestions(Math.abs(parseInt(daysSinceLaunch))); // Gets the absolute value of the days-since integer and puts it in the function, so no matter the date you will get a question
     
+    if (loading) return <p>Loading question...</p>;
     const selectedQuestion = questions.find(q => q.id === questionId); // Grabs a selected question from the json file
     if (!selectedQuestion) return <p>Question not found. Error id: {daysSinceLaunch}</p>; // In case the selected option doesn't exist, displays error
     
@@ -60,7 +79,6 @@ function Question(){
     const equation = selectedQuestion.equationJson;
     const answer = selectedQuestion.answerJson;
     const inputInclude = selectedQuestion.inputIncludeJson;
-    const [endGame, setEndGame] = useState(0);
 
     /**
      * Gets endgame from the inputBox.jsx to return the game over screen

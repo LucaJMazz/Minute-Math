@@ -50,8 +50,8 @@ body {
 
 div.nav-left img.icon {
   vertical-align: middle;
-  width: clamp(25px, 2.5vw, 200px);
-  height: clamp(25px, 2.5vw, 200px);
+  width: clamp(30px, 2.8vw, 200px);
+  height: clamp(30px, 2.8vw, 200px);
   object-fit: contain;
   border-radius: 4px;
 }
@@ -59,14 +59,14 @@ div.nav-left img.icon {
 div.nav-left .menuIcon {
   vertical-align: middle;
   margin-top: -0.4vw;
-  font-size: clamp(20px, 2.5vw, 200px);
+  font-size: clamp(35px, 2.8vw, 200px);
   cursor: pointer;
   user-select: none;
 }
 
 div.nav-left h3 {
   font-family: "Lilita One", sans-serif;
-  font-size: 1.5vw;
+  font-size: clamp(20px, 1.8vw, 200px);
   color: #ffffff;
   text-align: center;
 }
