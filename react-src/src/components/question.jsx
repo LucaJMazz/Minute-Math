@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 import { useState } from "react"
-import { MathJaxContext, MathJax } from "better-react-mathjax";
+import { addStyles, StaticMathField } from "react-mathquill";
 import { motion } from 'framer-motion'
 import InputBox from './inputBox'
 import GameOver from "./gameOver";
 
 function Question(){
 
+    addStyles();
+
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [endGame, setEndGame] = useState(0);
 
-    useEffect(() => {
+    useEffect(() => { // fetch from minute math api
     fetch(`https://lucajmazz.github.io/minute-math-data/dailyQuestions.json?cb=${Date.now()}`)
         .then((res) => res.json())
         .then((data) => {
@@ -50,7 +52,6 @@ function Question(){
     const launchDate = new Date("2025-05-04T00:00:00Z"); // universal and consistent // Launch date is here to tell the site when the clues start
     const daysSinceLaunch = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24)).toString(); // Calculates the current day and the amount of days since launch 
     const questionAmount = questions[questions.length-1]?.id; // Total amount of questions in the json file
-    console.log(questionAmount);
 
     /**
      * Recursive function makes sure the id's don't go out of the bounds of the question amount
@@ -106,9 +107,9 @@ function Question(){
                 <h1 className="question-title"> {question} </h1>
 
                 <div className="question-display">
-                    <MathJaxContext className="equation">
-                        <MathJax> {equation} </MathJax>
-                    </MathJaxContext>
+                    <StaticMathField className="equation">
+                        {equation} 
+                    </StaticMathField>
                 </div>
                 
             </motion.div>

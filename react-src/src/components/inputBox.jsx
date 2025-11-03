@@ -2,7 +2,10 @@ import { useState } from "react"
 import { useEffect } from "react";
 import { motion } from "framer-motion"
 import IncorrectPopup from "./incorrectPopup";
+import { addStyles, EditableMathField } from "react-mathquill";
 import { getGameStats, checkAndResetDaily, saveChances, saveScore, completeGame } from "../utils/localData";
+
+addStyles(); 
 
 function InputBox({answer, onEndGame, inputInclude}) {
 
@@ -104,9 +107,11 @@ function InputBox({answer, onEndGame, inputInclude}) {
                     <p>Input Your Answer: {chances} chances left</p>
                     <div className="input-box">
                         <p>{inputInclude}</p>
-                        <input onChange={(e) => setUserInput(e.target.value)}>
-                            
-                        </input>
+                        <EditableMathField
+                            latex={userInput || ""}
+                            onChange={(mathField) => {
+                                setUserInput(mathField.latex());
+                            }}/>
                     </div>
                     <motion.button className="button" onClick={handleSubmit} whileTap={{ scale: 0.9 }}>
                         Submit Answer
