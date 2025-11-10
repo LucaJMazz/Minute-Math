@@ -1,11 +1,9 @@
-import { useState } from "react"
-import { useEffect } from "react";
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion"
 import IncorrectPopup from "./incorrectPopup";
-import { addStyles, EditableMathField } from "react-mathquill";
+import { EditableMathField, StaticMathField } from "react-mathquill";
 import { getGameStats, checkAndResetDaily, saveChances, saveScore, completeGame } from "../utils/localData";
 
-addStyles(); 
 
 function InputBox({answer, onEndGame, inputInclude}) {
 
@@ -29,10 +27,75 @@ function InputBox({answer, onEndGame, inputInclude}) {
     const [triggerPopup, setTriggerPopup] = useState(false); // Used to trigger the Incorrect pop up, boolean value
     const [endGame, setEndGame] = useState(0); // Ends the game when set to 1
     const [completed, setCompleted] = useState( getGameStats().completed ); // To see if the game has been completed already
+    const [showKb, setShowKb] = useState(false); // show/hide kb box
+    const mathFieldRef = useRef(null); // mathquill cursor referencer
+
+    const kbButtons = { // buttons in kb box
+        sqrt: { 
+            code: "\\sqrt{ }",
+            display: "\\sqrt{x}",
+            move: -1,
+        },
+        exponent: { 
+            code: "\^{()}",
+            display: "x^y",
+            move: -2,
+        },
+        log: { 
+            code: "log()",
+            display: "log",
+            move: -1,
+        },
+        ln: { 
+            code: "ln()",
+            display: "ln",
+            move: -1,
+        },
+        sin: { 
+            code: "sin()",
+            display: "sin",
+            move: -1,
+        },
+        cos: { 
+            code: "cos()",
+            display: "cos",
+            move: -1,
+        },
+        tan: { 
+            code: "tan()",
+            display: "tan",
+            move: -1,
+        },
+        arcsin: { 
+            code: "arcsin()",
+            display: "arcsin",
+            move: -1,
+        },
+        arccos: { 
+            code: "arccos()",
+            display: "arccos",
+            move: -1,
+        },
+        arctan: { 
+            code: "arctan()",
+            display: "arctan",
+            move: -1,
+        },
+        pi: {
+            code: "\\pi",
+            display: "\\pi",
+            move: 0,
+        },
+        e: {
+            code: "e",
+            display: "e",
+            move: 0,
+        }
+    }
 
     /**
-     * - Refreshes the chances and completed variables
-     * - Gets the current stats from the local files and chances the local variables to match
+     * Refreshes the chances and completed variables
+     * Gets the current stats from the local files and chances the local variables to match
      */
     function refreshStates() {
         setCompleted( getGameStats().completed );
@@ -103,21 +166,48 @@ function InputBox({answer, onEndGame, inputInclude}) {
     } else { // Default return: the input area
         return (
             <>
+            <div className="input-wrapper">
+                <p>Input Your Answer: {chances} chances left</p>
                 <div className="input-area">
-                    <p>Input Your Answer: {chances} chances left</p>
                     <div className="input-box">
                         <p>{inputInclude}</p>
                         <EditableMathField
                             latex={userInput || ""}
                             onChange={(mathField) => {
                                 setUserInput(mathField.latex());
-                            }}/>
+                            }} 
+                            mathquillDidMount={(mf) => (mathFieldRef.current = mf)}/>
                     </div>
-                    <motion.button className="button" onClick={handleSubmit} whileTap={{ scale: 0.9 }}>
-                        Submit Answer
-                    </motion.button>
+                    <div className="functions-box">
+                        <button className="keyboard-fnc" onClick={() => setShowKb(!showKb)}> kb </button>
+                        <AnimatePresence>
+                            {(showKb) ?   <motion.div className="keyboard-box" 
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            exit={{ scale: 0 }}>
+                                <div className="keyboard-box-rect">
+                                {Object.entries(kbButtons).map(([key, value]) => (
+                                    <button key={key} onClick={() =>{
+                                        mathFieldRef.current.focus();
+                                        mathFieldRef.current.write(value.code);
+                                        for (let i = 0; i < Math.abs(value.move); i++) {
+                                            mathFieldRef.current.keystroke(value.move < 0 ? "Left" : "Right");
+                                        }
+                                        setShowKb(false);
+                                    }} className="kb-button">
+                                        <StaticMathField style={value.display.length > 5 ? {fontSize: "1.5vmax"} : {}}> {value.display} </StaticMathField>
+                                    </button>
+                                ))}
+                                </div>
+                            </motion.div> : null}
+                        </AnimatePresence>
+                    </div>
                 </div>
-                <IncorrectPopup animTrigger={triggerPopup}/>
+                <motion.button className="button" onClick={handleSubmit} whileTap={{ scale: 0.9 }}>
+                    Submit Answer
+                </motion.button>
+            </div>
+            <IncorrectPopup animTrigger={triggerPopup}/>
             </>
         )
     }
