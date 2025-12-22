@@ -10,14 +10,14 @@ function InputBox({answer, onEndGame, inputInclude}) {
     useEffect(() => {
         // Function to be called on page load
         function onPageLoad() {
-            checkAndResetDaily(); 
+            checkAndResetDaily();
             setTimeout(() => {
                 refreshStates();
             }, 100);
         }
-    
+
         onPageLoad();
-      }, []); // Empty dependency array ensures this runs only once
+    }, []); // Empty dependency array ensures this runs only once
 
     /**
     * Instantiates variables as useStates to be changed and used by the component
@@ -29,11 +29,15 @@ function InputBox({answer, onEndGame, inputInclude}) {
     const [completed, setCompleted] = useState( getGameStats().completed ); // To see if the game has been completed already
     const [showKb, setShowKb] = useState(false); // show/hide kb box
     const mathFieldRef = useRef(null); // mathquill cursor referencer
-
     const kbButtons = { // buttons in kb box
         sqrt: { 
             code: "\\sqrt{ }",
             display: "\\sqrt{x}",
+            move: -1,
+        },
+        nthRoot: { 
+            code: "\\sqrt[]{ }",
+            display: "\\sqrt[n]{x}",
             move: -1,
         },
         exponent: { 
@@ -41,9 +45,34 @@ function InputBox({answer, onEndGame, inputInclude}) {
             display: "x^y",
             move: -2,
         },
+        pi: {
+            code: "\\pi",
+            display: "\\pi",
+            move: 0,
+        },
+        e: {
+            code: "e",
+            display: "e",
+            move: 0,
+        },
+        theta: {
+            code: "\\theta",
+            display: "\\theta",
+            move: 0,
+        },
+        abs: { 
+            code: "||",
+            display: "|x|",
+            move: -1,
+        },
         log: { 
             code: "log()",
             display: "log",
+            move: -1,
+        },
+        logBase: { 
+            code: "log\_{}()",
+            display: "log\_{a}",
             move: -1,
         },
         ln: { 
@@ -81,16 +110,6 @@ function InputBox({answer, onEndGame, inputInclude}) {
             display: "arctan",
             move: -1,
         },
-        pi: {
-            code: "\\pi",
-            display: "\\pi",
-            move: 0,
-        },
-        e: {
-            code: "e",
-            display: "e",
-            move: 0,
-        }
     }
 
     /**
@@ -152,7 +171,6 @@ function InputBox({answer, onEndGame, inputInclude}) {
         onEndGame(endGame);
     }, [endGame]) // Dependencies on endGame
 
-
     if (completed == 1){ // If the game has been completed today, display a continue button to go back to the game over screen
         return (
             <div className="input-area">
@@ -170,24 +188,31 @@ function InputBox({answer, onEndGame, inputInclude}) {
                 <p>Input Your Answer: {chances} chances left</p>
                 <div className="input-area">
                     <div className="input-box">
-                        <p>{inputInclude}</p>
-                        <EditableMathField
-                            latex={userInput || ""}
-                            onChange={(mathField) => {
-                                setUserInput(mathField.latex());
-                            }} 
-                            mathquillDidMount={(mf) => (mathFieldRef.current = mf)}/>
+                        <div className="inputInclude" style={(inputInclude.length < 1) ? {width: '0'} : {}}>
+                            <p > {inputInclude} </p>
+                        </div>
+                        <div className="mf-holder">
+                            <EditableMathField
+                                latex={userInput || ""}
+                                onChange={(mathField) => {
+                                    setUserInput(mathField.latex());
+                                }} 
+                                mathquillDidMount={(mf) => (mathFieldRef.current = mf)}
+                                onFocus={() => {setShowKb(false)}}/>
+                        </div>
+                        <div style={{width: '10px'}}>  </div> 
                     </div>
                     <div className="functions-box">
                         <button className="keyboard-fnc" onClick={() => setShowKb(!showKb)}> kb </button>
                         <AnimatePresence>
-                            {(showKb) ?   <motion.div className="keyboard-box" 
+                            {(showKb) ? <motion.div className="keyboard-box" 
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0 }}>
-                                <div className="keyboard-box-rect">
+                            <div className="keyboard-box-rect">
+                            <div className="kb-scroll-box">
                                 {Object.entries(kbButtons).map(([key, value]) => (
-                                    <button key={key} onClick={() =>{
+                                    <button key={key} onClick={() => {
                                         mathFieldRef.current.focus();
                                         mathFieldRef.current.write(value.code);
                                         for (let i = 0; i < Math.abs(value.move); i++) {
@@ -195,10 +220,11 @@ function InputBox({answer, onEndGame, inputInclude}) {
                                         }
                                         setShowKb(false);
                                     }} className="kb-button">
-                                        <StaticMathField style={value.display.length > 5 ? {fontSize: "1.5vmax"} : {}}> {value.display} </StaticMathField>
+                                        <StaticMathField style={value.display.length > 5 ? { fontSize: "1.5vmax" } : {}}> {value.display} </StaticMathField>
                                     </button>
                                 ))}
-                                </div>
+                            </div>
+                            </div>
                             </motion.div> : null}
                         </AnimatePresence>
                     </div>

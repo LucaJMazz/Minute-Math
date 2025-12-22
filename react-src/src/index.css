@@ -39,6 +39,7 @@ body {
   top: 0;
   left: 0;
   z-index: 999;
+  overflow: hidden;
 }
 
 /* Nav bar left side */
@@ -115,10 +116,11 @@ div.nav-left h3 {
   margin-top: -5%;
   left: 0;
   height: 100vh;
-  width: 350px;
+  width: 30vw;
+  overflow-y: scroll;
 
   background-color: #e6deeb;
-  border-right: #8a78a5 solid 5px;
+  border-right: #8a78a5 solid .5vmax;
   z-index: 500;
 
   display: flex;
@@ -126,29 +128,39 @@ div.nav-left h3 {
   align-items: start;
   justify-content: flex-start;
   padding-top: 11.5vmax;
-  font-size: 20.5px;
+  padding-left: 2vmax;
+
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 500ms;
 } 
 
-.side-menu-wrapper a{
-  text-decoration: none;
-  color: #343434;
-}
 
-.side-menu-wrapper p {
-  margin-left: 20px;
+.side-menu-wrapper p{
+  font-size: 2vmax;
 }
-
 .side-button {
-  width: calc(100% - 4rem);
-  cursor: pointer;
-  padding: 1rem;
-  padding-left: 3rem;
-  border-bottom: 2px solid #8a78a5;
-}
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  text-decoration: none;
+  font-size: 1.2vmax;
+  color: #343434;
+  cursor: pointer;
+  width: calc(100% - 4rem);
+
+  border: solid .5vmax #8a78a5;
+  border-radius: 10000rem;
+  background-color: #ffffff;
+  box-shadow: 0px 6px 0px 1px #786990;
+  padding: .8vmax;
+  margin: .5vmax;
+
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 200ms;
+}
 .side-button:hover {
-  background-color: #8a78a533;
-  border-bottom: 5px solid #8a78a5;
+  transform: scaleY(110%) scaleX(105%);
 }
 
 
@@ -314,6 +326,10 @@ div.question-display {
 
     font-size: clamp(20px, 1.9vw, 40px);
   }
+
+  .side-menu-wrapper a {
+    border-radius: .2rem;
+  }
 }
 
 /* Input Box */
@@ -343,12 +359,12 @@ div.question-display {
   position: relative;
 
   border: solid 0.6vmax #8a78a5;
-  border-radius: 20px;
-  width: clamp(30px, 6vw, 571px);
-  height: clamp(30px, 6vw, 571px);
+  border-radius: clamp(0px, 2vmax, 500px);
+  width: clamp(60px, 6vw, 571px);
+  height: clamp(60px, 6vw, 571px);
   justify-content: center;
 
-  font-size: clamp(18px, 1.5vw, 38px);
+  font-size: clamp(18px, 2.1vw, 58px);
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
   cursor: pointer;
@@ -365,6 +381,7 @@ div.question-display {
   transform: translateY(7px);
   box-shadow: 0px 3px 0px 0px #786990;
 }
+
 .keyboard-box {
   position: absolute;
   pointer-events: none;
@@ -375,43 +392,54 @@ div.question-display {
   justify-content: center;
   height: 20rem;
   width: 35rem;
-  filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0px .5vmax .5vmax rgba(0, 0, 0, 0.3));
 }
 .keyboard-box-rect {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
 
   pointer-events:all;
-  transform: translateY(-80%);
+  transform: translateY(calc(-80% - 3vh));
   background-color: #e6deeb;
-  height: 18rem;
-  width: 22rem;
-  padding: 2rem;
+  height: 15vmax;
+  width: fit-content;
+  padding: 2vmax;
   border-radius: 2rem;
 }
 .keyboard-box-rect::before {
   pointer-events: none;
   content: '';
   position: absolute;
-  top: 80%;
-  left: calc(50% - 2.5rem);
-  height: 5rem;
-  width: 5rem;
+  top: calc(60% + 5vmax);
+  left: calc(50% - 2vmax);
+  height: 4vmax;
+  width: 4vmax;
   transform: rotate(45deg);
   background-color: #e6deeb;
   z-index: -1;
 }
 
+.kb-scroll-box {
+  height: 100%;
+  width: fit-content;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  border-radius: 1rem;
+}
+
 .kb-button {
   cursor: pointer;
   user-select: none;
-  width: 5rem;
-  height: 5rem;
-  margin: .3rem;
+  width: 5vmax;
+  height: 5vmax;
+  margin: .3vmax;
   background-color: white;
   border: #8a78a5 solid 0.5vmax;
   border-radius: .5rem;
@@ -475,11 +503,12 @@ div.question-display {
   align-items: center;
   flex-direction: row;
   justify-content: center;
+  overflow: scroll;
 
   border: solid 0.6vmax #8a78a5;
   border-radius: 20px;
   width: clamp(470px, 33vw, 800px);
-  height: clamp(30px, 7vw, 571px);
+  height: clamp(50px, 7vw, 571px);
   justify-content: center;
 
   font-size: clamp(18px, 1.5vw, 38px);
@@ -488,6 +517,17 @@ div.question-display {
 .input-box p {
   font-size: 2.5vmax;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: 0;
+}
+.inputInclude {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  overflow: scroll;
+  width: clamp(100px, 10vw, 700px);
+  padding: 0;
+  margin: 5px;
 }
 
 .input-box .mq-editable-field {
@@ -497,11 +537,21 @@ div.question-display {
   background-color: #fdfdfd !important;
   background: transparent !important;
   outline: none !important;
-  border-bottom: solid 2.5px #8a78a54f !important;
   cursor:text !important;
   padding: 3px !important;
-  min-width: 300px !important;
+  min-width: 250px !important;
   text-align: center !important;
+}
+
+.mf-holder {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  overflow: scroll;
+
+  width: clamp(300px, 100%, 900px);
+  border-bottom: solid 2.5px #8a78a54f !important;
 }
 
 .button.continue {
@@ -542,7 +592,7 @@ div.incorrect-popup {
 
   .input-box {
     width: clamp(250px, 60vw, 800px);
-    height: clamp(30px, 10vw, 571px);
+    height: clamp(60px, 10vw, 571px);
     justify-content: center;
     margin-bottom: 1.5vw;
 
@@ -553,21 +603,37 @@ div.incorrect-popup {
     font-size: 2.5vmax;
   }
 
-  .input-box input {
-    height: 80%;
-    width: 70%;
-
-    background: transparent;
-    outline: none;
-    border: solid 2.5px #8a78a54f;
-    font-size: 2.5vmax;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  .input-box .mq-editable-field {
+    min-width: 500px !important;
   }
+  .mf-holder {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    overflow: scroll;
+
+    width: clamp(300px, 100%, 700px);
+    border-bottom: solid 2.5px #8a78a54f !important;
+  }
+
+  .inputInclude p{
+    width: clamp(70px, 6vw, 800px);
+  }
+
 
   .button.continue {
     padding: 15px;
     font-size: clamp(18px, 1.5vw, 38px);
     width: 100%;
+  }
+
+  .keyboard-box-rect {
+    top: -10%;
+    left: -12%;
+  }
+  .keyboard-box-rect::before {
+    left: calc(50% - 2vmax + 30%);
   }
 
 }

@@ -6,10 +6,9 @@ function SideMenu({isVisible}) {
         <AnimatePresence>
             {isVisible ? (
                     <motion.div className="side-menu-wrapper"
-                        initial={{ x: -350 }}
+                        initial={{ x: '-35vw' }}
                         animate={{ x: 0 }}
-                        exit={{ x: -350 }}
-                        transition={{ type: "tween", ease: "easeOut", duration: 0.25 }}
+                        exit={{ x: '-35vw' }}
                     >
                         <p> References </p>
                         <a className="side-button" target="_blank" href="/answer-format">
@@ -22,7 +21,7 @@ function SideMenu({isVisible}) {
                             Full About Page
                         </a>
                         <p> Links </p>
-                        <a className="side-button" target="_blank" href="https://www.openalgebra.com/?utm_source=MinuteMath(InDevelopment)">
+                        <a className="side-button" target="_blank" href="https://www.openalgebra.com/?utm_source=MinuteMath">
                             Math Help
                         </a>
                         <a className="side-button" target="_blank" href="https://github.com/LucaJMazz/Minute-Math">
