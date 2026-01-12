@@ -7,7 +7,6 @@ A daily math challenge web app that gives you one hard-hitting algebra or logic 
 
 ## 🚀 How to play (Everything is still in development)
 - Open the [Homepage](https://minutemath.netlify.app), view your score and streak
-- Your score and streak are saved into your local data
 - Click play to play the current puzzle
 - Try and complete the problem, and make sure to know what the problem is asking you to solve
 - Type in your answer and press submit
