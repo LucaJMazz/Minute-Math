@@ -81,6 +81,27 @@ div.nav-left h3 {
   font-size: clamp(25px, 1.9vw, 200px);
 }
 
+.nav-right .login {
+  width: clamp(50px, 9.8vh, 150px);
+  height: clamp(25px, 4.1vh, 75px);;
+  cursor: pointer;
+  outline: none;
+  background-color: whitesmoke;
+  border-radius: 0.5rem;
+  border: solid .2rem #8A78A5;
+  font-size: clamp(10px, 1vw, 200px);
+  font-family: "Bree Serif", serif;
+  transition: all 200ms ease-in-out;
+}
+.nav-right .login:hover {
+  background-color: #8A78A5;
+  color: whitesmoke;
+}
+.nav-right .login:active {
+  transform: scale(0.95);
+}
+
+
 /* Nav bar right side */
 .nav-right {
   display: flex;
@@ -578,6 +599,25 @@ div.incorrect-popup {
   pointer-events: none;
 }
 
+.toast {
+  position: absolute;
+  top: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: solid 0.7vmax #8A78A5;
+  background-color: #e6deeb;
+  border-radius: 10000px;
+  width: clamp(70px, 15vw, 800px);
+  height: clamp(30px, 4vw, 571px);
+  font-size: 1.3vmax;
+  color: #8A78A5;
+
+  pointer-events: none;
+}
+
 /* input box Small*/
 @media (max-width: 768px) {
   .input-area {
@@ -720,4 +760,39 @@ div.incorrect-popup {
     padding-bottom: 2%;
     font-size: clamp(18px, 3vw, 38px);
   }
+}
+
+
+
+.login-wrapper {
+  z-index: 100;
+  position: absolute;
+  top: calc(5% + 10%);
+  left: 50%;
+  height: clamp(100px, 50vmax, 650px);
+  width: clamp(75px, 37.5vmax, 487.5px);
+  border-radius: 2vmax;
+  background-color: #E6DDEB;
+  border: #8A78A5 solid 1vmax;
+  box-shadow: 
+    10px 10px 0px #8A78A5,
+    10px 10px 40px rgba(0, 0, 0, 0.433);
+}
+
+.blur-background {
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.422);
+  backdrop-filter: blur(10px);
+}
+
+.profile-image {
+  border-radius: 10000rem;
+  border: whitesmoke solid 2px;
+  width: clamp(30px, 2.8vw, 200px);
+  object-fit: contain;
 }

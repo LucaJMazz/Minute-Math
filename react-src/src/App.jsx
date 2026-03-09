@@ -1,19 +1,12 @@
 import { useEffect } from 'react'
-import { initializeLocalStorageDefaults } from './utils/localData'
 import './index.css'
 import Question from './components/question'
 import NavBar from './components/navBar'
+import { useAuth } from './hooks/useAuth'
+
 
 function App() {
-
-  useEffect(() => {
-          // Function to be called on page load
-          function onPageLoad() {
-            initializeLocalStorageDefaults(); // initializes local data if the user is new to the page
-          }
-      
-          onPageLoad();
-        }, []); // Empty dependency array ensures this runs only once
+  const { user } = useAuth();
   
 /**
  * Returns all of the UI for the app

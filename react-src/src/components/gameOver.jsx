@@ -1,26 +1,47 @@
-import { useState } from 'react';
+import { useActionState, useState } from 'react';
 import { useEffect } from 'react';
 import { motion, useMotionValue, animate } from 'framer-motion';
-import { getGameStats } from "../utils/localData";
+import { useAuth } from '../hooks/useAuth';
+import { getUserProfile } from '../firestore';
 
 function GameOver({endGame, handleEndGame, answer, inputInclude}) {
+    const {user} = useAuth();
+    const [profile, setProfile] = useState(null);
+    useEffect(() => {
+        if (user) {
+            // User is logged in - fetch profile data
+            const fetchProfile = async () => {
+                // Add a small delay to allow Firebase updates to complete
+                await new Promise(resolve => setTimeout(resolve, 500));
+                const data = await getUserProfile(user.uid);
+                setProfile(data);
+                setScore(data?.score || 0);
+                setStreak(data?.streak || 0);
+                console.log("Fetched profile:", data);
+            };
+            fetchProfile();
+        } else {
+            // User not logged in - score/streak not available
+            setScore(0);
+            setStreak(0);
+        }
+    }, [user]);
 
     const winLoss = (endGame-1 ? "Correct! You solved todays problem" : "Wrong answer, try again next time!"); // Sets the title of a win or loss
     const [answerString, setAnswer] = useState("Show Answer"); // Creates variable to display the answer for the question
+    const [score, setScore] = useState(0);
+    const [streak, setStreak] = useState(0);
 
     // State variables to store the animated display values for score and streak
     const [displayScore, setDisplayScore] = useState(0);
     const [displayStreak, setDisplayStreak] = useState(0);
-
-    // Retrieve the stored game score and streak from local storage
-    const score = getGameStats().score;
-    const streak = getGameStats().streak;
 
     // Create motion values for Framer Motion to animate score and streak
     const scoreCount = useMotionValue(0);    
     const streakCount = useMotionValue(0);
 
     useEffect(() => {
+        console.log("Animating score:", score, "streak:", streak);
         // Animate scoreCount and streakCount from 0 to their respective values
         const scoreControls = animate(scoreCount, score, { duration: 1 });
         const streakControls = animate(streakCount, streak, { duration: 1 });
@@ -42,7 +63,7 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
             unsubscribeScore();
             unsubscribeStreak();
         };
-    }, []); // No dependencies, runs once when component mounts
+    }, [score, streak]); // Run when score or streak change
 
 
     /** 

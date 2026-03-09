@@ -9,6 +9,7 @@
     <title>Minute Math</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script type="module" src="/firebase-home.js"></script>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 
@@ -46,7 +47,7 @@
         <button class="playButton" id="how-button">How to Play</button>
     </div>
 
-    <div class="userStats">
+    <!-- <div class="userStats">
         <h1 class="title" id="user-stats-title">User Stats</h1>
         
         <div class="userStatWrapper">
@@ -58,15 +59,9 @@
             <h2>Streak</h2>
             <p id="streak">0</p>
         </div>
-        <script>
-            // Load score and streak from localStorage
-            const score = localStorage.getItem("minuteScore") || 0;
-            const streak = localStorage.getItem("minuteStreak") || 0;
-            document.getElementById("score").textContent = score;
-            document.getElementById("streak").textContent = streak;
-        </script>
         </div>
-    </div>
+    </div> -->
+    <br/>
 
     <div class="bottomInfo">
         <span class="infoText"> 
@@ -75,7 +70,7 @@
                 Minute Math is a free to play, open-source math game, designed to help you sharpen your math skills in just a few minutes a day.
                 I made this as a simple portfolio project inspired by games like <a href="https://www.minutecryptic.com/" target="_blank">Minute Cryptic</a> and <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank">Wordle</a> but with a mathematical twist.
                 I believe that math is a skill that can be improved with practice, and Minute Math is here to help you do just that.
-                As a student in computer science, math is a skill that is often used and needs consistent practice to hone your skills so i started this as a way to practise math myself.
+                As a student in computer science, math is a skill that is often used and needs consistent practice to hone your skills so I started this as a way to practise math myself.
                 I hope you enjoy it as much as I do!
             </p>
         </span> 

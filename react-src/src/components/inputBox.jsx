@@ -2,31 +2,18 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import IncorrectPopup from "./incorrectPopup";
 import { EditableMathField, StaticMathField } from "react-mathquill";
-import { getGameStats, checkAndResetDaily, saveChances, saveScore, completeGame } from "../utils/localData";
-
+import { useAuth } from "../hooks/useAuth";
+import { updateScore, updateStreak, getUserProfile, updateDailyChances, completeGame } from "../firestore";
 
 function InputBox({answer, onEndGame, inputInclude}) {
-
-    useEffect(() => {
-        // Function to be called on page load
-        function onPageLoad() {
-            checkAndResetDaily();
-            setTimeout(() => {
-                refreshStates();
-            }, 100);
-        }
-
-        onPageLoad();
-    }, []); // Empty dependency array ensures this runs only once
-
     /**
     * Instantiates variables as useStates to be changed and used by the component
     */
     const [userInput, setUserInput] = useState(""); // Gets user input from input box as a String
-    const [chances, setChances] = useState(getGameStats().chances); // Sets the amount of chances you have left as an integer
+    const [chances, setChances] = useState(0); // Sets the amount of chances you have left as an integer
     const [triggerPopup, setTriggerPopup] = useState(false); // Used to trigger the Incorrect pop up, boolean value
     const [endGame, setEndGame] = useState(0); // Ends the game when set to 1
-    const [completed, setCompleted] = useState( getGameStats().completed ); // To see if the game has been completed already
+    const [completed, setCompleted] = useState(false); // To see if the game has been completed already
     const [showKb, setShowKb] = useState(false); // show/hide kb box
     const mathFieldRef = useRef(null); // mathquill cursor referencer
     const kbButtons = { // buttons in kb box
@@ -112,42 +99,80 @@ function InputBox({answer, onEndGame, inputInclude}) {
         },
     }
 
-    /**
-     * Refreshes the chances and completed variables
-     * Gets the current stats from the local files and chances the local variables to match
-     */
-    function refreshStates() {
-        setCompleted( getGameStats().completed );
-        setChances( getGameStats().chances );
+    const { user } = useAuth(); 
+    const [profile, setProfile] = useState(null);
+
+    useEffect(() => {
+    if (user) {
+        // User is logged in - load from Firebase
+        const fetchProfile = async () => {
+            const data = await getUserProfile(user.uid);
+            setProfile(data);
+            setChances(data?.dailyChances || 5);
+            setCompleted(data?.completedDay || false);
+        };
+        fetchProfile();
+    } else {
+        // User not logged in - load from localStorage only
+        const savedChances = localStorage.getItem("dailyChances");
+        const savedCompleted = localStorage.getItem("completedDay");
+        
+        setChances(savedChances ? parseInt(savedChances) : 5);
+        setCompleted(savedCompleted === "true");
     }
+    }, [user]);
 
     /**
      * Handles the 'submit answer' button
      */
-    function handleSubmit() {
-        let correctAnswer = testCorrectAnswer(userInput); // If the users answers match the json's answer
-
-        let newChances = chances - 1; // Decrements the users chances
-        saveChances(newChances); // Updates local storage
-
-        let endGameValue = endGame; // Temp endgame value to be used by if statements
-        
-        if (correctAnswer) { // Winner
-            addScore();
-            completeGame(1);
-            setCompleted(1);
-            endGameValue = 2;
-        } else if (!correctAnswer && newChances > 0) { // Incorrect, plays pop up
-            setTriggerPopup(true);
-            setTimeout(() => setTriggerPopup(false), 1200);
-        } else if (!correctAnswer && newChances <= 0) { // Out of chances, loser
-            completeGame(1);
-            setCompleted(1);
-            endGameValue = 1;
-        } 
-        
-        setChances(newChances); // Updates the chances useState
-        setEndGame(endGameValue); // Updates the endGame useState
+    async function handleSubmit() {
+        try {
+            let correctAnswer = testCorrectAnswer(userInput);
+            let newChances = chances - 1;
+            let endGameValue = endGame;
+            
+            if (user) {
+                // LOGGED IN: Use Firebase for everything
+                await updateDailyChances(user.uid, newChances);
+                
+                if (correctAnswer) {
+                    await addScore();
+                    await updateStreak(user.uid);
+                    await completeGame(user.uid, 1);
+                    setCompleted(true);
+                    endGameValue = 2;
+                } else if (!correctAnswer && newChances > 0) {
+                    setTriggerPopup(true);
+                    setTimeout(() => setTriggerPopup(false), 1200);
+                } else if (!correctAnswer && newChances <= 0) {
+                    await updateStreak(user.uid);
+                    await completeGame(user.uid, 1);
+                    setCompleted(true);
+                    endGameValue = 1;
+                }
+            } else {
+                // NOT LOGGED IN: Use localStorage only
+                localStorage.setItem("dailyChances", newChances.toString());
+                
+                if (correctAnswer) {
+                    localStorage.setItem("completedDay", "true");
+                    setCompleted(true);
+                    endGameValue = 2;
+                } else if (!correctAnswer && newChances > 0) {
+                    setTriggerPopup(true);
+                    setTimeout(() => setTriggerPopup(false), 1200);
+                } else if (!correctAnswer && newChances <= 0) {
+                    localStorage.setItem("completedDay", "true");
+                    setCompleted(true);
+                    endGameValue = 1;
+                }
+            }
+            
+            setChances(newChances);
+            setEndGame(endGameValue);
+        } catch (error) {
+            console.error("Error submitting answer:", error);
+        }
     }
 
     function testCorrectAnswer(userAnswer) {
@@ -156,11 +181,17 @@ function InputBox({answer, onEndGame, inputInclude}) {
     }
 
     /**
-     * Adds the users score to the local storage based on how many chances are left
+     * Adds the users score to Firebase (only for logged in users)
      */
-    function addScore() {
-        let score = getGameStats().score;
-        saveScore(score + (chances*10));
+    async function addScore() {
+        if (user) {
+            try {
+                await updateScore(user.uid, chances * 10);
+            } catch (error) {
+                console.error("Error updating score:", error);
+            }
+        }
+        // Score only saved for logged in users
     }
 
     /**
@@ -171,7 +202,7 @@ function InputBox({answer, onEndGame, inputInclude}) {
         onEndGame(endGame);
     }, [endGame]) // Dependencies on endGame
 
-    if (completed == 1){ // If the game has been completed today, display a continue button to go back to the game over screen
+    if (completed){ // If the game has been completed today, display a continue button to go back to the game over screen
         return (
             <div className="input-area">
                 <motion.button className="button continue" whileTap={{ scale: 0.9 }} onClick={()=>{
