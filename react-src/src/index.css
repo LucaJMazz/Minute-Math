@@ -769,14 +769,21 @@ div.incorrect-popup {
   position: absolute;
   top: calc(5% + 10%);
   left: 50%;
+  translate: -50%;
   height: clamp(100px, 50vmax, 650px);
   width: clamp(75px, 37.5vmax, 487.5px);
   border-radius: 2vmax;
   background-color: #E6DDEB;
   border: #8A78A5 solid 1vmax;
   box-shadow: 
-    10px 10px 0px #8A78A5,
-    10px 10px 40px rgba(0, 0, 0, 0.433);
+  10px 10px 0px #8A78A5,
+  10px 10px 40px rgba(0, 0, 0, 0.433);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 1rem;
 }
 
 .blur-background {
@@ -795,4 +802,36 @@ div.incorrect-popup {
   border: whitesmoke solid 2px;
   width: clamp(30px, 2.8vw, 200px);
   object-fit: contain;
+}
+
+.signInButton {
+  background-color:#fdfdfd;
+  color: #343434;
+  font-size: clamp(.7rem, 2vw, 2rem);
+  width: 90%;
+}
+
+.signInButton:hover {
+  color:#E6DDEB;
+}
+
+.signInIcon {
+  margin-inline: clamp(.1rem, 0.5vw, 3rem);;
+  height: clamp(.7rem, 5vw, 3rem);;
+}
+
+.spinner {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #8a78a5 94%, #0000) top/11.5px 11.5px no-repeat,
+    conic-gradient(#0000 30%, #8a78a5);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 11.5px), #000 0);
+  animation: spinner-c7wet2 0.8s infinite linear;
+}
+
+@keyframes spinner-c7wet2 {
+  100% {
+    transform: rotate(1turn);
+  }
 }

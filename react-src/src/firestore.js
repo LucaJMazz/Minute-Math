@@ -1,5 +1,57 @@
-import { doc, setDoc, getDoc, updateDoc, collection, addDoc, query, orderBy, limit, getDocs, increment, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, increment, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebase";
+
+const getTodayString = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+};
+
+const getDateString = (value) => {
+    if (!value) return null;
+    if (typeof value === "string") return value;
+
+    const date = typeof value.toDate === "function" ? value.toDate() : value;
+    if (!(date instanceof Date) || Number.isNaN(date.getTime())) return null;
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+};
+
+const getYesterdayString = () => {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return getDateString(yesterday);
+};
+
+const getProfileWithCurrentDailyState = async (userRef, userSnap) => {
+    const data = userSnap.data();
+    const today = getTodayString();
+    const lastPlayed = getDateString(data.lastPlayed);
+    const hasCompletedToday = lastPlayed === today && Boolean(data.completedDay || data.completedGame);
+
+    if (!hasCompletedToday && (data.completedDay || data.dailyChances !== 5)) {
+        const resetData = {
+            completedDay: false,
+            completedGame: false,
+            correctAnswer: false,
+            dailyChances: 5,
+        };
+
+        await updateDoc(userRef, resetData);
+        return { ...data, ...resetData };
+    }
+
+    return {
+        ...data,
+        completedDay: hasCompletedToday || Boolean(data.completedDay),
+        dailyChances: hasCompletedToday ? (data.dailyChances ?? 0) : 5,
+    };
+};
 
 // Initialize user document when they first sign up
 export const createUserProfile = async (user) => {
@@ -8,15 +60,17 @@ export const createUserProfile = async (user) => {
         const userSnap = await getDoc(userRef);
 
         if (!userSnap.exists()) {
-            const today = new Date().toISOString().split('T')[0];
             await setDoc(userRef, {
                 email: user.email,
                 name: user.displayName || "name",
-                lastPlayed: serverTimestamp(),
+                lastPlayed: null,
+                lastPlayedAt: null,
                 score: 0,
                 gamesPlayed: 0,
                 streak: 0,
                 completedDay: false,
+                completedGame: false,
+                correctAnswer: false,
                 dailyChances: 5,
             });
         }
@@ -35,6 +89,7 @@ export const newDay = async (user) => {
 
     await updateDoc(userRef, {
         "completedDay": false,
+        "completedGame": false,
         "dailyChances": 5,
     });
 }
@@ -46,7 +101,8 @@ export const getUserProfile = async (userId) => {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
-            return { id: userSnap.id, ...userSnap.data() };
+            const data = await getProfileWithCurrentDailyState(userRef, userSnap);
+            return { id: userSnap.id, ...data };
         }
         return null;
     } catch (error) {
@@ -66,13 +122,11 @@ export const updateScore = async (userId, scoreToday) => {
 
         if (!userSnap.exists()) return;
 
-        const userData = userSnap.data();
-
-        let newScore = userData.score + scoreToday;
-
         await updateDoc(userRef, {
-            "score": newScore,
+            "score": increment(scoreToday),
             "completedDay": true,
+            "completedGame": true,
+            "correctAnswer": Boolean(scoreToday),
             "dailyChances": 0,
         });
     } catch (error) {
@@ -92,12 +146,8 @@ export const updateDailyChances = async (userId, chances) => {
 
         if (!userSnap.exists()) return;
 
-        const userData = userSnap.data();
-
-        let newChances = chances;
-
         await updateDoc(userRef, {
-            "dailyChances": newChances,
+            "dailyChances": Math.max(chances, 0),
         });
     } catch (error) {
         console.error("Error updating daily chances:", error);
@@ -105,7 +155,7 @@ export const updateDailyChances = async (userId, chances) => {
     }
 }
 
-export const completeGame = async (userId, chances) => {
+export const completeGame = async (userId) => {
     try {
         if (!userId) {
             console.error("completeGame called with invalid userId:", userId);
@@ -118,6 +168,10 @@ export const completeGame = async (userId, chances) => {
 
         await updateDoc(userRef, {
             "completedGame": true,
+            "completedDay": true,
+            "dailyChances": 0,
+            "lastPlayed": getTodayString(),
+            "lastPlayedAt": serverTimestamp(),
         });
     } catch (error) {
         console.error("Error completing game:", error);
@@ -134,13 +188,9 @@ export const updateStreak = async (userId) => {
         if (!userSnap.exists()) return;
 
         const userData = userSnap.data();
-        const today = new Date().toISOString().split('T')[0];
-        const lastPlayed = userData.lastPlayed;
-
-        // Calculate if streak should continue
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayStr = yesterday.toISOString().split('T')[0];
+        const today = getTodayString();
+        const lastPlayed = getDateString(userData.lastPlayed);
+        const yesterdayStr = getYesterdayString();
 
         let newStreak = userData.streak || 0;
 
@@ -157,7 +207,8 @@ export const updateStreak = async (userId) => {
 
         await updateDoc(userRef, {
             "streak": newStreak,
-            lastPlayed: serverTimestamp()
+            "lastPlayed": today,
+            "lastPlayedAt": serverTimestamp()
         });
     } catch (error) {
         console.error("Error updating streak:", error);

@@ -13,6 +13,7 @@
     "better-react-mathjax": "^2.3.0",
     "firebase": "^12.8.0",
     "motion": "^12.9.2",
+    "papaparse": "^5.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-mathquill": "^1.0.4"

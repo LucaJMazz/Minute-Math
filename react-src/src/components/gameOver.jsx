@@ -15,6 +15,10 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
                 await new Promise(resolve => setTimeout(resolve, 500));
                 const data = await getUserProfile(user.uid);
                 setProfile(data);
+                if (data.dailyChances > 0) {
+                    handleEndGame(0);
+                    return;
+                }
                 setScore(data?.score || 0);
                 setStreak(data?.streak || 0);
                 console.log("Fetched profile:", data);
@@ -27,7 +31,18 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
         }
     }, [user]);
 
-    const winLoss = (endGame-1 ? "Correct! You solved todays problem" : "Wrong answer, try again next time!"); // Sets the title of a win or loss
+    const [winLoss, setWinLoss] = useState("");
+
+    useEffect(() => {
+        console.log('gameover:', profile);
+        let winlossText = "";
+        if (!user) 
+            winlossText = localStorage.correctAnswer ? "Correct! You solved todays problem" : "Wrong answer, try again next time!";
+        else if (profile)
+            winlossText = profile.correctAnswer ? "Correct! You solved todays problem" : "Wrong answer, try again next time!";
+        setWinLoss(winlossText);
+    }, [profile, user])
+
     const [answerString, setAnswer] = useState("Show Answer"); // Creates variable to display the answer for the question
     const [score, setScore] = useState(0);
     const [streak, setStreak] = useState(0);
@@ -70,7 +85,7 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
      * Displays the answer on the button
      */
     function showAnswer() {
-        setAnswer(inputInclude +""+ answer[0]);
+        setAnswer((inputInclude ?? "") +""+ answer[0]);
     }
 
     /**
@@ -88,6 +103,7 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
     }
 
     // Returns the game over screen
+    if (!user || profile)
     return (
         <motion.div className="game-over" initial={{opacity:0}} animate={{opacity: 1}}>
             <motion.h1 className="title" initial={{scale:0}} animate={{scale: 1}}> {winLoss} </motion.h1>
@@ -105,6 +121,11 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
                 <motion.h2 > Score: {displayScore}</motion.h2>
                 <motion.h2 > Streak: {displayStreak}</motion.h2>
             </motion.div>
+        </motion.div>
+    ) 
+    else return (
+        <motion.div className="game-over" style={{minHeight: '10rem', minWidth: '15rem'}} initial={{opacity:0}} animate={{opacity: 1}}>
+            <div className='spinner'></div>
         </motion.div>
     )
 };

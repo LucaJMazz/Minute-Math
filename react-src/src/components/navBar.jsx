@@ -77,7 +77,10 @@ function NavBar() {
                 <SideMenu isVisible={menuOpen}/>
             </div>
             <div>
-                <Login isVisible={loginOpen}/>
+                <Login 
+                    isVisible={loginOpen}
+                    onClose={() => setLoginOpen(false)}
+                />
             </div>
             <Toast text={'Successfully Logged Out'} animTrigger={triggerToast} setAnimTrigger={setTriggerToast}/>
         </>

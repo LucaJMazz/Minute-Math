@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import Papa from "papaparse";
 import { addStyles, StaticMathField } from "react-mathquill";
 import { motion } from 'framer-motion'
 import InputBox from './inputBox'
@@ -14,16 +14,29 @@ function Question(){
     const [endGame, setEndGame] = useState(0);
 
     useEffect(() => { // fetch from minute math api
-    fetch(`https://lucajmazz.github.io/minute-math-data/dailyQuestions.json?cb=${Date.now()}`)
-        .then((res) => res.json())
-        .then((data) => {
-        setQuestions(data);
-        setLoading(false);
-        })
-        .catch((err) => {
-        console.error("Failed to fetch questions:", err);
-        setLoading(false);
-        });
+        fetch(`https://docs.google.com/spreadsheets/d/e/2PACX-1vTix3WGsFJcd2SK4QIOFBLOHamUIbcBBSeY-tdtxg_5Y6l-17GSaMV-iX4o_sqWdc2r8Z04JS-0-S09/pub?output=csv`)
+            .then((res) => res.text())
+            .then((csv) => {
+                const parsed = Papa.parse(csv, {
+                    header: true,
+                    dynamicTyping: true,
+                    complete: (results) => {
+                        // Turn the answerJson string into an actual array
+                        const questions = results.data.map(q => ({
+                            ...q,
+                            answer: JSON.parse(q.answer)
+                        }));
+                        questions.map((q) => {console.log(q.answer)});
+                        setQuestions(questions);
+                        setLoading(false);
+                    }
+                });
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.error("Failed to fetch questions:", err);
+                setLoading(false);
+            });
     }, []);
     /*
      * Configures the MathJax settings for display
@@ -49,7 +62,7 @@ function Question(){
         return difficultyString
     }
 
-    const launchDate = new Date("2025-05-04T00:00:00Z"); // universal and consistent // Launch date is here to tell the site when the clues start
+    const launchDate = new Date("2025-05-04T00:00:00Z"); // Launch date is here to tell the site when the clues start
     const daysSinceLaunch = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24)).toString(); // Calculates the current day and the amount of days since launch 
     const questionAmount = questions[questions.length-1]?.id; // Total amount of questions in the json file
 
@@ -67,19 +80,20 @@ function Question(){
     }
     
     const questionId = recycleQuestions(Math.abs(parseInt(daysSinceLaunch))); // Gets the absolute value of the days-since integer and puts it in the function, so no matter the date you will get a question
-    
-    if (loading) return <p>Loading question...</p>;
-    const selectedQuestion = questions.find(q => q.id === questionId); // Grabs a selected question from the json file
+    if (loading) return (
+        <div className="spinner"></div>
+    )
+    const selectedQuestion = questions.find(q => q.id == questionId); // Grabs a selected question from the json file
     if (!selectedQuestion) return <p>Question not found. Error id: {daysSinceLaunch}</p>; // In case the selected option doesn't exist, displays error
     
     /**
      * Gets all the variables from the selected json question to be used by the components
      */
-    const difficulty = getDifficulty(selectedQuestion.difficultyJson);
-    const question = selectedQuestion.questionJson;
-    const equation = selectedQuestion.equationJson;
-    const answer = selectedQuestion.answerJson;
-    const inputInclude = selectedQuestion.inputIncludeJson;
+    const difficulty = getDifficulty(selectedQuestion.difficulty);
+    const question = selectedQuestion.question;
+    const equation = selectedQuestion.equation;
+    const answer = selectedQuestion.answer;
+    const inputInclude = selectedQuestion.input;
 
     /**
      * Gets endgame from the inputBox.jsx to return the game over screen

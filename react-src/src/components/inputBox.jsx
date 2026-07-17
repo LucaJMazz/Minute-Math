@@ -10,6 +10,7 @@ function InputBox({answer, onEndGame, inputInclude}) {
     * Instantiates variables as useStates to be changed and used by the component
     */
     const [userInput, setUserInput] = useState(""); // Gets user input from input box as a String
+    const [inputIncludeState, setInputInclude] = useState(inputInclude ?? "");
     const [chances, setChances] = useState(0); // Sets the amount of chances you have left as an integer
     const [triggerPopup, setTriggerPopup] = useState(false); // Used to trigger the Incorrect pop up, boolean value
     const [endGame, setEndGame] = useState(0); // Ends the game when set to 1
@@ -113,12 +114,33 @@ function InputBox({answer, onEndGame, inputInclude}) {
         };
         fetchProfile();
     } else {
-        // User not logged in - load from localStorage only
-        const savedChances = localStorage.getItem("dailyChances");
-        const savedCompleted = localStorage.getItem("completedDay");
-        
-        setChances(savedChances ? parseInt(savedChances) : 5);
-        setCompleted(savedCompleted === "true");
+
+        const today = () => {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, "0");
+            const day = String(now.getDate()).padStart(2, "0");
+            return `${year}-${month}-${day}`;
+        };
+        const lastPlayedDate = localStorage.getItem("lastPlayedDate");
+
+        if (lastPlayedDate !== today()) {
+            // New day (or first visit) - reset everything
+            localStorage.setItem("dailyChances", "5");
+            localStorage.setItem("completedDay", "false");
+            localStorage.setItem("correctAnswer", "false");
+            localStorage.setItem("lastPlayedDate", today());
+
+            setChances(5);
+            setCompleted(false);
+        } else {
+            // Same day - load saved state as before
+            const savedChances = localStorage.getItem("dailyChances");
+            const savedCompleted = localStorage.getItem("completedDay");
+
+            setChances(savedChances ? parseInt(savedChances) : 5);
+            setCompleted(savedCompleted === "true");
+        }
     }
     }, [user]);
 
@@ -138,7 +160,7 @@ function InputBox({answer, onEndGame, inputInclude}) {
                 if (correctAnswer) {
                     await addScore();
                     await updateStreak(user.uid);
-                    await completeGame(user.uid, 1);
+                    await completeGame(user.uid);
                     setCompleted(true);
                     endGameValue = 2;
                 } else if (!correctAnswer && newChances > 0) {
@@ -146,7 +168,7 @@ function InputBox({answer, onEndGame, inputInclude}) {
                     setTimeout(() => setTriggerPopup(false), 1200);
                 } else if (!correctAnswer && newChances <= 0) {
                     await updateStreak(user.uid);
-                    await completeGame(user.uid, 1);
+                    await completeGame(user.uid);
                     setCompleted(true);
                     endGameValue = 1;
                 }
@@ -156,6 +178,7 @@ function InputBox({answer, onEndGame, inputInclude}) {
                 
                 if (correctAnswer) {
                     localStorage.setItem("completedDay", "true");
+                    localStorage.setItem("correctAnswer", "true");
                     setCompleted(true);
                     endGameValue = 2;
                 } else if (!correctAnswer && newChances > 0) {
@@ -163,6 +186,7 @@ function InputBox({answer, onEndGame, inputInclude}) {
                     setTimeout(() => setTriggerPopup(false), 1200);
                 } else if (!correctAnswer && newChances <= 0) {
                     localStorage.setItem("completedDay", "true");
+                    localStorage.setItem("correctAnswer", "false");
                     setCompleted(true);
                     endGameValue = 1;
                 }
@@ -219,8 +243,8 @@ function InputBox({answer, onEndGame, inputInclude}) {
                 <p>Input Your Answer: {chances} chances left</p>
                 <div className="input-area">
                     <div className="input-box">
-                        <div className="inputInclude" style={(inputInclude.length < 1) ? {width: '0'} : {}}>
-                            <p > {inputInclude} </p>
+                        <div className="inputInclude" style={(inputIncludeState.length < 1) ? {width: '0'} : {}}>
+                            <p > {inputIncludeState} </p>
                         </div>
                         <div className="mf-holder">
                             <EditableMathField
