@@ -29,7 +29,6 @@ function NavBar() {
         try {
             await signOut(auth);
             setTriggerToast(true);
-            console.log('User logged out');
         } catch (err) {
             console.error("Logout failed", err);
         }
@@ -38,8 +37,6 @@ function NavBar() {
     useEffect(() => {
         if (user) {
             setLoginOpen(false);
-            console.log('loggedIn');
-            console.log(user);
         }
     }, [user]);
     

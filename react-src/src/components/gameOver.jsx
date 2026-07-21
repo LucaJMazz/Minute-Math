@@ -3,10 +3,12 @@ import { useEffect } from 'react';
 import { motion, useMotionValue, animate } from 'framer-motion';
 import { useAuth } from '../hooks/useAuth';
 import { getUserProfile } from '../firestore';
+import { StaticMathField, addStyles } from 'react-mathquill';
 
 function GameOver({endGame, handleEndGame, answer, inputInclude}) {
     const {user} = useAuth();
     const [profile, setProfile] = useState(null);
+    addStyles();
     useEffect(() => {
         if (user) {
             // User is logged in - fetch profile data
@@ -21,7 +23,7 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
                 }
                 setScore(data?.score || 0);
                 setStreak(data?.streak || 0);
-                console.log("Fetched profile:", data);
+                // console.log("Fetched profile:", data);
             };
             fetchProfile();
         } else {
@@ -34,7 +36,7 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
     const [winLoss, setWinLoss] = useState("");
 
     useEffect(() => {
-        console.log('gameover:', profile);
+        // console.log('gameover:', profile);
         let winlossText = "";
         if (!user) 
             winlossText = localStorage.correctAnswer ? "Correct! You solved todays problem" : "Wrong answer, try again next time!";
@@ -43,7 +45,7 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
         setWinLoss(winlossText);
     }, [profile, user])
 
-    const [answerString, setAnswer] = useState("Show Answer"); // Creates variable to display the answer for the question
+    const [answerString, setAnswer] = useState("\\text{Show Answer}"); // Creates variable to display the answer for the question
     const [score, setScore] = useState(0);
     const [streak, setStreak] = useState(0);
 
@@ -56,7 +58,7 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
     const streakCount = useMotionValue(0);
 
     useEffect(() => {
-        console.log("Animating score:", score, "streak:", streak);
+        // console.log("Animating score:", score, "streak:", streak);
         // Animate scoreCount and streakCount from 0 to their respective values
         const scoreControls = animate(scoreCount, score, { duration: 1 });
         const streakControls = animate(streakCount, streak, { duration: 1 });
@@ -85,7 +87,8 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
      * Displays the answer on the button
      */
     function showAnswer() {
-        setAnswer((inputInclude ?? "") +""+ answer[0]);
+        const latex = `${inputInclude ?? ""} ${answer[0]}`;
+        setAnswer(latex);
     }
 
     /**
@@ -110,7 +113,9 @@ function GameOver({endGame, handleEndGame, answer, inputInclude}) {
             <motion.div className="answer" initial={{scale:0}} animate={{scale: 1}}>
                 <h2 className="title" > The answer was </h2>
                 <motion.div whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick={showAnswer}>
-                    {answerString}
+                    <StaticMathField className="equation">
+                        {answerString} 
+                    </StaticMathField>
                 </motion.div>
             </motion.div>
             <motion.div initial={{y: 200}} animate={{y:0, transition:{duration:0.2}}}>

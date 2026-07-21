@@ -22,11 +22,19 @@ function Question(){
                     dynamicTyping: true,
                     complete: (results) => {
                         // Turn the answerJson string into an actual array
-                        const questions = results.data.map(q => ({
-                            ...q,
-                            answer: JSON.parse(q.answer)
-                        }));
-                        questions.map((q) => {console.log(q.answer)});
+                        const questions = results.data.map((q, index) => {
+                            try {
+                                return {
+                                    ...q,
+                                    answer: JSON.parse(q.answer)
+                                };
+                            } catch (err) {
+                                console.error("BAD ROW:", index + 2);
+                                console.error("ANSWER:", q.answer);
+                                throw err;
+                            }
+                        });
+                        // questions.map((q) => {console.log(q.answer)});
                         setQuestions(questions);
                         setLoading(false);
                     }

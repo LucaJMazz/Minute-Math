@@ -150,6 +150,7 @@ function InputBox({answer, onEndGame, inputInclude}) {
     async function handleSubmit() {
         try {
             let correctAnswer = testCorrectAnswer(userInput);
+            // console.log(correctAnswer);
             let newChances = chances - 1;
             let endGameValue = endGame;
             
@@ -201,6 +202,12 @@ function InputBox({answer, onEndGame, inputInclude}) {
 
     function testCorrectAnswer(userAnswer) {
         let formattedAnswer = userAnswer.replaceAll(' ', '');
+
+        // console.log(formattedAnswer === answer[1]);
+        // console.log(formattedAnswer.length, answer[1].length);
+        // console.log([...formattedAnswer].map(c => c.charCodeAt(0)));
+        // console.log([...answer[1]].map(c => c.charCodeAt(0)));
+
         return answer.includes(formattedAnswer);
     }
 

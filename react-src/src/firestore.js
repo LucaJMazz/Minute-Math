@@ -32,9 +32,9 @@ const getProfileWithCurrentDailyState = async (userRef, userSnap) => {
     const data = userSnap.data();
     const today = getTodayString();
     const lastPlayed = getDateString(data.lastPlayed);
-    const hasCompletedToday = lastPlayed === today && Boolean(data.completedDay || data.completedGame);
+    const isNewDay = lastPlayed !== today;
 
-    if (!hasCompletedToday && (data.completedDay || data.dailyChances !== 5)) {
+    if (isNewDay) {
         const resetData = {
             completedDay: false,
             completedGame: false,
@@ -48,8 +48,8 @@ const getProfileWithCurrentDailyState = async (userRef, userSnap) => {
 
     return {
         ...data,
-        completedDay: hasCompletedToday || Boolean(data.completedDay),
-        dailyChances: hasCompletedToday ? (data.dailyChances ?? 0) : 5,
+        completedDay: Boolean(data.completedDay || data.completedGame),
+        dailyChances: data.dailyChances ?? 5,
     };
 };
 
@@ -147,7 +147,9 @@ export const updateDailyChances = async (userId, chances) => {
         if (!userSnap.exists()) return;
 
         await updateDoc(userRef, {
-            "dailyChances": Math.max(chances, 0),
+            'dailyChances': Math.max(chances, 0),
+            'lastPlayed': getTodayString(),
+            'lastPlayedAt': serverTimestamp(),
         });
     } catch (error) {
         console.error("Error updating daily chances:", error);
@@ -206,9 +208,7 @@ export const updateStreak = async (userId) => {
         }
 
         await updateDoc(userRef, {
-            "streak": newStreak,
-            "lastPlayed": today,
-            "lastPlayedAt": serverTimestamp()
+            'streak': newStreak,
         });
     } catch (error) {
         console.error("Error updating streak:", error);

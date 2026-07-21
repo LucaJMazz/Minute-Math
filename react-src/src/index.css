@@ -86,7 +86,7 @@ div.nav-left h3 {
   height: clamp(25px, 4.1vh, 75px);;
   cursor: pointer;
   outline: none;
-  background-color: whitesmoke;
+  background-color: #EFEFEF;
   border-radius: 0.5rem;
   border: solid .2rem #8A78A5;
   font-size: clamp(10px, 1vw, 200px);
@@ -332,6 +332,12 @@ div.question-display {
   }
     
   div.question-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
     width: clamp(250px, 60vw, 800px);
     border: #8a78a5 solid 0.8vmax;
   }
@@ -525,6 +531,8 @@ div.question-display {
   flex-direction: row;
   justify-content: center;
   overflow: scroll;
+  box-sizing: border-box;
+  overflow-x: hidden;
 
   border: solid 0.6vmax #8a78a5;
   border-radius: 20px;
@@ -560,7 +568,7 @@ div.question-display {
   outline: none !important;
   cursor:text !important;
   padding: 3px !important;
-  min-width: 250px !important;
+  width: 250px !important;
   text-align: center !important;
 }
 
@@ -571,7 +579,8 @@ div.question-display {
   justify-content: center;
   overflow: scroll;
 
-  width: clamp(300px, 100%, 900px);
+  width: 100%;
+  max-width: 100%;
   border-bottom: solid 2.5px #8a78a54f !important;
 }
 
@@ -621,7 +630,7 @@ div.incorrect-popup {
 /* input box Small*/
 @media (max-width: 768px) {
   .input-area {
-  font-size: clamp(16px, 1.2vw, 38px);
+    font-size: clamp(16px, 1.2vw, 38px);
   }
 
   .button {
@@ -644,7 +653,7 @@ div.incorrect-popup {
   }
 
   .input-box .mq-editable-field {
-    min-width: 500px !important;
+    width: 100%;
   }
   .mf-holder {
     display: flex;
@@ -653,7 +662,8 @@ div.incorrect-popup {
     justify-content: center;
     overflow: scroll;
 
-    width: clamp(300px, 100%, 700px);
+    width: 100%;
+    max-width: 100%;
     border-bottom: solid 2.5px #8a78a54f !important;
   }
 

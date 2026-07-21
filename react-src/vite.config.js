@@ -17,4 +17,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    allowedHosts: [
+      "prude-runny-emphatic.ngrok-free.dev",
+    ]
+  }
 });
