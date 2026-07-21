@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { motion } from 'framer-motion'
-import Icon from "../assets/Icon.png";
+import Icon from "../assets/Icon.webp";
 import SideMenu from "./sideMenu";
 import Toast from "./toast";
 import Login from "./login";
